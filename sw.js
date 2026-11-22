@@ -1,9 +1,9 @@
-const CACHE='v8-sim-v2';
+const CACHE='v8-sim-v3';
 const SHELL=['./','index.html','manifest.json','icon-192.png','icon-512.png','icon-maskable-512.png','apple-touch-icon.png'];
 const THREE='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(async c=>{
-    await c.addAll(SHELL);
+    await Promise.all(SHELL.map(u=>c.add(u).catch(()=>{})));   /* one missing file must not break the install */
     try{await c.add(new Request(THREE,{mode:'cors'}));}catch(_){}
   }).then(()=>self.skipWaiting()));
 });
