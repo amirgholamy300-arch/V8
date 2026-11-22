@@ -33,8 +33,12 @@ button{font-family:inherit;color:inherit}
 .stat{display:flex;align-items:center;gap:14px;font-size:12.5px;font-weight:600;margin:3px 4px;flex:none;white-space:nowrap;overflow:hidden}
 .stat span{display:flex;align-items:center;gap:5px}
 .leds{display:flex;align-items:center;gap:clamp(4px,1.6vw,8px);padding:5px 8px 2px;flex:none}
-.led{flex:none;width:clamp(9px,3vw,13px);aspect-ratio:1;border-radius:50%;background:currentColor;opacity:.22;transition:opacity .05s}
-.led.on{opacity:1;box-shadow:0 0 7px currentColor}
+.rbar{position:relative;flex:1;min-width:0;height:14px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.07);border:1px solid var(--line)}
+body.light .rbar{background:rgba(0,0,0,.06)}
+.rfill{position:absolute;inset:0;clip-path:inset(0 100% 0 0)}
+.rbar.fl .rfill{opacity:.4}
+.rtick{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,.5)}
+.rred{position:absolute;top:0;bottom:0;width:2px;background:#fff;opacity:.6}
 .cut{margin-left:4px;border:1.5px solid var(--red);color:var(--red);font-size:11px;font-weight:600;padding:3px 6px;border-radius:5px;opacity:.55;letter-spacing:.08em}
 .cut.on{background:var(--red);color:#fff;opacity:1}
 .flame{color:var(--amber);opacity:.3;margin-left:6px;display:grid}
@@ -208,8 +212,8 @@ function physics(dt){
     let Te;
     if(S.run){const lim=preset.limit,st=G.lim;let cf;
       if(st===1){cf=clamp((rpm-(lim-260))/260,0,1);S.cut=cf>0.3?1:0;}                 /* soft: progressive cylinder drop */
-      else{const hy=st===2?120:80;                                                    /* hard: fuel cut with hysteresis */
-        if(S.cut>0){S.cutT+=h;if(S.cutT>0.05&&rpm<lim-hy)S.cut=0;}
+      else{const hy=st===2?160:150;                                                    /* hard: fuel cut with hysteresis */
+        if(S.cut>0){S.cutT+=h;if(S.cutT>0.08&&rpm<lim-hy)S.cut=0;}
         else if(rpm>=lim){S.cut=1;S.cutT=0;}
         cf=S.cut>0?1:clamp((rpm-(lim-90))/90,0,1)*0.35;}                              /* a few cylinders drop just before the cut */
       S.cutFrac=cf;Te=tq(rpm)*Math.pow(thrE,1.1)*(1-cf)-fr;}
@@ -253,7 +257,7 @@ function autoShift(dt){
 
 /* ================= SCENE ================= */
 const $=s=>document.querySelector(s);
-const G={op:0.07,slow:true,vib:true,tunnel:true,sound:true,vol:0.7,whine:true,lim:0,exh:1,room:1,pops:true,gb:false,rec:false,light:false,imm:false};
+const G={view:0,bf:true,exv:true,op:0.07,slow:true,vib:true,tunnel:true,sound:true,vol:0.7,whine:true,lim:0,exh:1,room:1,pops:true,gb:false,rec:false,light:false,imm:false};
 const canvas=$('#c'),vp=$('#vp');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
@@ -432,11 +436,83 @@ for(let k=1;k<=6;k++){const pair=P.ratios[k]/P.i0,rm=C_DIST*pair/(1+pair),rc=C_D
 const sleeves=GX.s.map(x=>{const m=mk(gearGeo(3.5,20,1.5,1.8,0.45),MAT.sleeve);m.position.set(x,0,0);engine.add(m);return m;});
 const flange=mk(discGeo(4.3,0,1.2,[{n:4,d:2.8,r:0.55}]),MAT.dark);flange.position.x=78;engine.add(flange);
 
+/* ---- exhaust: 4-into-1 headers per bank, collector, pipe, muffler and chrome tip ---- */
+const MAT_EX=PH(0xb4bac6,{shininess:130,emissive:0x000000}),MAT_TIP=PH(0xeceff4,{shininess:170}),MAT_MUF=PH(0x7b8492,{shininess:90});
+const exhG=new THREE.Group();engine.add(exhG);
+const EXT=[];                                   /* tailpipe tips = where the flames come out */
+const TIP_X=62,PIPE_Y=-9,PIPE_Z=27;
+const xcylG=(r0,r1,len,seg)=>{const g=new THREE.CylinderGeometry(r0,r1,len,seg||20);g.rotateZ(Math.PI/2);return g;};   /* axis along +x, r0 at -x end */
+[1,-1].forEach(b=>{
+  const th=b*45*D2R,ct=Math.cos(th),st=Math.sin(th);
+  const toW=(x,ly,lz)=>new THREE.Vector3(x,ly*ct-lz*st,ly*st+lz*ct);          /* bank-local -> engine space */
+  CYL.filter(c=>c.bank===b).forEach((c,k)=>{
+    const xi=c.bank>0?-2.2:2.2,px=c.x-xi,p0=toW(px,23.2,b*9.2);
+    const lane=PIPE_Z+1.2+k*0.9;                                  /* each primary keeps its own lane so tubes never overlap */
+    const curve=new THREE.CatmullRomCurve3([p0,
+      new THREE.Vector3(px,p0.y-0.8,b*(Math.abs(p0.z)+2.6)),
+      new THREE.Vector3(px+(23-px)*0.3,p0.y-8,b*lane),
+      new THREE.Vector3(px+(23-px)*0.75,-2.5-k*0.5,b*lane),
+      new THREE.Vector3(23.5,-4.6,b*PIPE_Z)]);
+    exhG.add(mk(new THREE.TubeGeometry(curve,28,0.95,10,false),MAT_EX));
+    const fl=mk(new THREE.CylinderGeometry(2.0,2.0,0.7,14),MAT_EX);          /* port flange */
+    fl.position.copy(p0);fl.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),new THREE.Vector3(0,-b*st,b*ct).normalize());exhG.add(fl);
+  });
+  const col=mk(xcylG(3.4,2.1,5,18),MAT_EX);col.position.set(24.5,-4.8,b*PIPE_Z);exhG.add(col);
+  const pipe=new THREE.CatmullRomCurve3([new THREE.Vector3(26.5,-4.9,b*PIPE_Z),new THREE.Vector3(32,-6.4,b*PIPE_Z),new THREE.Vector3(38,-9,b*PIPE_Z),new THREE.Vector3(41,PIPE_Y,b*PIPE_Z)]);
+  exhG.add(mk(new THREE.TubeGeometry(pipe,20,2.0,12,false),MAT_EX));
+  const muf=mk(xcylG(3.9,3.9,17,24),MAT_MUF);muf.position.set(49.5,PIPE_Y,b*PIPE_Z);exhG.add(muf);
+  {const c1=mk(xcylG(2.2,3.9,1.6,24),MAT_MUF);c1.position.set(40.6,PIPE_Y,b*PIPE_Z);exhG.add(c1);
+   const c2=mk(xcylG(3.9,2.6,1.6,24),MAT_MUF);c2.position.set(58.4,PIPE_Y,b*PIPE_Z);exhG.add(c2);}
+  const tip=mk(xcylG(2.6,2.6,4.6,22),MAT_TIP);tip.position.set(TIP_X-2.3,PIPE_Y,b*PIPE_Z);exhG.add(tip);
+  const ring=mk(new THREE.TorusGeometry(2.6,0.35,8,24),MAT_TIP);ring.rotation.y=Math.PI/2;ring.position.set(TIP_X,PIPE_Y,b*PIPE_Z);exhG.add(ring);
+  EXT.push(new THREE.Vector3(TIP_X+0.4,PIPE_Y,b*PIPE_Z));
+});
+/* flames: two additive cones (orange shell + hot core) per tailpipe, animated by BF below */
+const flameGeo=new THREE.ConeGeometry(1,1,14,1,true);flameGeo.rotateZ(-Math.PI/2);flameGeo.translate(0.5,0,0);   /* apex toward +x */
+const FLM=EXT.map(p=>{
+  const g=new THREE.Group();g.position.copy(p);g.visible=false;exhG.add(g);
+  const outer=mk(flameGeo,new THREE.MeshBasicMaterial({color:0xff6a10,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.DoubleSide}));
+  const core=mk(flameGeo,new THREE.MeshBasicMaterial({color:0xffe7a0,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.DoubleSide}));
+  g.add(outer,core);return{g,outer,core,life:0,len:10,rr:1};});
+const exGlow=new THREE.PointLight(0xff7a22,0,70);exGlow.position.set(TIP_X+6,PIPE_Y+2,0);engine.add(exGlow);
+const BF={q:[],hiT:0,lifted:false,limT:0,any:false,heat:0};
+function fireBackfire(k){
+  A.bangQ=(A.bangQ||0)+1;A.bangK=k;
+  FLM.forEach(f=>{if(Math.random()<0.85){f.life=1;f.len=(9+15*k)*(0.75+0.5*Math.random());f.rr=1.5+1.6*k;}});}
+function backfireUpdate(dt){
+  const rpm=S.w*RPM;
+  /* lift-off detection: gas was mostly open in the last 0.5 s and is now almost closed */
+  if(S.thr>0.6)BF.hiT=0.5;else BF.hiT=Math.max(0,BF.hiT-dt);
+  if(S.thr>0.3)BF.lifted=false;
+  if(S.run&&S.thr<0.15&&BF.hiT>0&&!BF.lifted){BF.lifted=true;
+    if(rpm>2800){A.lift=true;
+      if(G.bf){const n=2+Math.floor(Math.random()*4)+(rpm>5000?2:0);let t=0.04+Math.random()*0.08;
+        for(let i=0;i<n;i++){BF.q.push({t,k:0.4+0.6*Math.random()*Math.min(1,rpm/5500)});t+=0.07+Math.random()*0.22;}}}}
+  /* "Bangs" limiter: a bang with a flame on most cuts */
+  if(S.run&&G.bf&&G.lim===2&&S.cut>0){BF.limT-=dt;if(BF.limT<=0){BF.q.push({t:0,k:0.7+0.3*Math.random()});BF.limT=0.08+Math.random()*0.12;}}else BF.limT=0;
+  for(let i=BF.q.length-1;i>=0;i--){const e=BF.q[i];e.t-=dt;if(e.t<=0){fireBackfire(e.k);BF.q.splice(i,1);}}
+  if(!S.run&&!S.starting)BF.q.length=0;
+  if(!AC)A.bangQ=0;
+  /* visuals */
+  let any=false,peak=0;
+  FLM.forEach((f,i)=>{
+    f.life=Math.max(0,f.life-dt/0.17);
+    const vis=f.life>0&&G.exv;f.g.visible=vis;
+    if(vis){any=true;const L=f.life,e=1-L,fl=0.85+0.3*Math.random();
+      const len=f.len*Math.min(1,e*9+0.15)*Math.pow(L,0.55)*fl,rad=f.rr*(0.5+0.9*e)*(0.6+0.4*L);
+      f.outer.scale.set(len,rad,rad);f.core.scale.set(len*0.55,rad*0.5,rad*0.5);
+      f.outer.material.opacity=0.85*L;f.core.material.opacity=0.95*L;peak=Math.max(peak,L);}});
+  exGlow.intensity=G.exv?peak*3.2:0;BF.any=any;
+  /* headers glow red-orange when hot */
+  const tgt=S.run?Math.pow(S.thrE,1.3)*clamp(rpm/6000,0,1):0;BF.heat+=(tgt-BF.heat)*(1-Math.exp(-dt/(tgt>BF.heat?1.5:4)));
+  MAT_EX.emissive.setRGB(BF.heat*0.55,BF.heat*0.13,BF.heat*0.02);
+  exhG.visible=G.exv;}
+
 /* ---- floor reflection hint ---- */
 const grid=new THREE.GridHelper(220,22,0x2a3346,0x1a2130);grid.position.set(30,-24,0);grid.material.transparent=true;grid.material.opacity=0.35;scene.add(grid);
 
 /* ---- camera ---- */
-const VIEW_ENGINE={a:-0.85,e:0.42,R:108,tx:3,ty:8,tz:0},VIEW_GB={a:-0.5,e:0.3,R:64,tx:51,ty:-2,tz:0};
+const VIEW_ENGINE={a:-0.85,e:0.42,R:108,tx:3,ty:8,tz:0},VIEW_GB={a:-0.5,e:0.3,R:64,tx:51,ty:-2,tz:0},VIEW_EX={a:0.95,e:0.2,R:92,tx:46,ty:-5,tz:0};
 const cam=Object.assign({},VIEW_ENGINE),camT=Object.assign({},VIEW_ENGINE);
 function camUpdate(dt){
   const f=1-Math.pow(0.002,dt);
@@ -515,8 +591,16 @@ function visuals(dt){
 
 /* ================= UI ================= */
 const el=id=>document.getElementById(id);
-const ledsBox=el('leds'),cutEl=el('cut'),LED=[];
-for(let i=0;i<16;i++){const d=document.createElement('i');d.className='led';d.style.color=i<6?'#31e07a':i<11?'#f5b400':'#ff4b3e';ledsBox.insertBefore(d,cutEl);LED.push(d);}
+const ledsBox=el('leds'),cutEl=el('cut');
+/* linear rev bar: continuous fill 0..RB_MAX rpm, tick every 1000 rpm, white mark at the limiter */
+const RB_MAX=9000,rbar=document.createElement('div'),rfill=document.createElement('div'),rred=document.createElement('i');
+rbar.className='rbar';rfill.className='rfill';rred.className='rred';rbar.appendChild(rfill);
+for(let k=1000;k<RB_MAX;k+=1000){const t=document.createElement('i');t.className='rtick';t.style.left=(k/RB_MAX*100)+'%';rbar.appendChild(t);}
+rbar.appendChild(rred);ledsBox.insertBefore(rbar,cutEl);
+let rbLim=0;
+function rbSetup(){const L=preset.limit/RB_MAX*100;
+  rfill.style.background='linear-gradient(90deg,#31e07a 0%,#31e07a '+(L*0.45).toFixed(1)+'%,#f5b400 '+(L*0.8).toFixed(1)+'%,#ff4b3e '+(L*0.93).toFixed(1)+'%,#ff4b3e 100%)';
+  rred.style.left=L+'%';rbLim=preset.limit;}
 let toastT;function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),1900);}
 const inp={gas:0,brake:0},held={gas:false,brake:false},keys={gas:false,brake:false};
 function bindPedal(id,key){const e=el(id),fill=e.querySelector('.fill'),pct=e.querySelector('.pct');let pid=null;
@@ -554,7 +638,7 @@ function applyTheme(){document.body.classList.toggle('light',G.light);glassMats.
 el('tTunnel').onclick=()=>{G.tunnel=!G.tunnel;setOn('tTunnel',G.tunnel);applyGlass();};
 el('tVib').onclick=()=>{G.vib=!G.vib;setOn('tVib',G.vib);};
 el('tSound').onclick=()=>{audioInit();G.sound=!G.sound;setOn('tSound',G.sound);applyVol();toast(G.sound?'Sound on':'Sound off');};
-el('tGear').onclick=()=>{G.gb=!G.gb;setOn('tGear',G.gb);Object.assign(camT,G.gb?VIEW_GB:VIEW_ENGINE);el('gbinfo').style.display=G.gb?'block':'none';};
+el('tGear').onclick=()=>{G.gb=!G.gb;G.view=G.gb?1:0;setOn('tGear',G.gb);Object.assign(camT,G.gb?VIEW_GB:VIEW_ENGINE);el('gbinfo').style.display=G.gb?'block':'none';};
 el('theme').onclick=()=>{G.light=!G.light;applyTheme();};
 el('slow').onclick=()=>{G.slow=!G.slow;setOn('slow',G.slow);toast(G.slow?'Slow motion x0.25':'Normal visual speed');};
 el('full').onclick=()=>{G.imm=!G.imm;el('app').classList.toggle('imm',G.imm);setOn('full',G.imm);setTimeout(resize,50);};
@@ -585,6 +669,7 @@ function renderSheet(){
    <div class="row"><div>Exhaust<small>Tone, bark and rasp</small></div><div class="chips">${EXH.map((p,i)=>chip('exh',p.name,G.exh===i,i)).join('')}</div></div>
    <div class="row"><div>Rev limiter<small>Hard = fuel cut · Soft = cylinders drop · Bangs = cut with loud spits</small></div><div class="chips">${['Hard','Soft','Bangs'].map((n,i)=>chip('lim',n,G.lim===i,i)).join('')}</div></div>
    <div class="row"><div>Overrun crackle<small>Pops when you lift off at high rpm</small></div>${chip('pops',G.pops?'On':'Off',G.pops)}</div>
+   <div class="row"><div>Backfire<small>Bangs and flames from the tailpipes on lift-off and in Bangs limiter mode</small></div><div class="chips">${chip('bf',G.bf?'On':'Off',G.bf)}${chip('bfnow','Test',false)}</div></div>
    <div class="row"><div>Room<small>Reverb around the car</small></div><div class="chips">${['Open','Garage','Tunnel'].map((n,i)=>chip('room',n,G.room===i,i)).join('')}</div></div>
    <div class="row"><div>Supercharger whine<small>Roots blower pitch follows rpm</small></div>${chip('whine',G.whine?'On':'Off',G.whine)}</div>`;}
   else if(tab==='drive'){h=`<h3>Drive</h3><div class="row"><div>Gearbox</div><div class="chips">${chip('auto','Manual',!S.auto,0)}${chip('auto','Auto',S.auto,1)}</div></div>
@@ -594,6 +679,8 @@ function renderSheet(){
    <div class="row"><div>Clutch<small>Automatic: opens on every shift, slips on launch</small></div></div>`;}
   else if(tab==='more'){h=`<h3>More</h3><div class="row"><div>Glass opacity</div><input type="range" min="2" max="35" value="${Math.round(G.op*100)}" data-act="op"></div>
    <div class="row"><div>Slow motion</div>${chip('slow',G.slow?'On':'Off',G.slow)}</div>
+   <div class="row"><div>Exhaust<small>Headers, pipes and tailpipe flames</small></div>${chip('exv',G.exv?'Shown':'Hidden',G.exv)}</div>
+   <div class="row"><div>Camera</div><div class="chips">${['Engine','Gearbox','Exhaust'].map((n,i)=>chip('view',n,G.view===i,i)).join('')}</div></div>
    <div class="row"><div>Reset<small>Stops the engine and the car</small></div>${chip('reset','Reset',false)}</div>
    <div class="row"><div>Keys<small>W / ↑ gas · S / ↓ brake · Space start · X / Z shift · drag to orbit, pinch to zoom</small></div></div>`;}
   sheet.innerHTML=h;sheet.classList.toggle('show',tab!=='dash');}
@@ -603,12 +690,15 @@ sheet.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b|
   if(a==='preset')applyPreset(+v);else if(a==='snd'){G.sound=!G.sound;setOn('tSound',G.sound);applyVol();}
   else if(a==='whine')G.whine=!G.whine;else if(a==='exh'){G.exh=+v;audioTone();}else if(a==='lim')G.lim=+v;else if(a==='pops')G.pops=!G.pops;else if(a==='room'){G.room=+v;applyRoom();}else if(a==='auto')S.auto=v==='1';
   else if(a==='slow'){G.slow=!G.slow;setOn('slow',G.slow);}
+  else if(a==='bf')G.bf=!G.bf;else if(a==='bfnow'){audioInit();fireBackfire(1);}
+  else if(a==='exv')G.exv=!G.exv;
+  else if(a==='view'){G.view=+v;G.gb=v==='1';setOn('tGear',G.gb);el('gbinfo').style.display=G.gb?'block':'none';Object.assign(camT,v==='1'?VIEW_GB:v==='2'?VIEW_EX:VIEW_ENGINE);}
   else if(a==='reset'){S.run=false;S.starting=false;S.w=0;S.v=0;S.gear=0;S.shift=null;S.clT=1;S.map=0;S.cut=0;S.cutT=0;S.cutFrac=0;toast('Reset');}
   renderSheet();});
 sheet.addEventListener('input',e=>{const a=e.target.dataset.act;if(a==='vol'){G.vol=e.target.value/100;applyVol();}else if(a==='op'){G.op=e.target.value/100;applyGlass();}else if(a==='limrpm'){preset.limit=+e.target.value;const lv=el('limv');if(lv)lv.textContent=preset.limit;}});
 
 /* ================= AUDIO ================= */
-const A={w:0,run:false,thr:0,thrRaw:0,boost:0,cut:false,cutFrac:0,starting:false,sc:true,gear:0,wIn:0,v:0,popLvl:0};
+const A={bangQ:0,bangK:1,lift:false,w:0,run:false,thr:0,thrRaw:0,boost:0,cut:false,cutFrac:0,starting:false,sc:true,gear:0,wIn:0,v:0,popLvl:0};
 let AC=null,gainNode=null,nodes=null,audioPrevThr=0;
 /* exhaust voicings: fb/kd = pipe resonance + damping, lp = brightness, boom = muffler hump (dB),
    rasp = distortion, crack = combustion snap, popMul = overrun / limiter pops, body = weights of the 4 "thump" resonances */
@@ -672,7 +762,7 @@ function audioInit(){
   /* cross-plane V8: firing order 1-8-7-2-6-5-4-3 -> bank sequence A B A B B A B A (uneven pulses per pipe = the V8 burble) */
   const BK=[1,0,1,0,0,1,0,1],AMP=[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78];
   let cp=0,pos=0,ie=0,tk=0,inl=0,lzA=0,wl=0,scp=0,stp=0,gp=0,prevCut=false;
-  let run=false,starting=false,cutNow=false,cutF=0,thr=0,rpmN=0,evG=1,dfco=false,popP=0,spit=0,P=EXH[1],rpmB=0;
+  let spitCk=0.3,cutS=0,run=false,starting=false,cutNow=false,cutF=0,thr=0,rpmN=0,evG=1,dfco=false,popP=0,spit=0,P=EXH[1],rpmB=0;
   function pulse(b,a,c){imp[b]+=a;ck[b]+=c;}
   function onEvent(p){
     const b=BK[p];
@@ -682,9 +772,9 @@ function audioInit(){
     const r=Math.random();
     const burn=evG*AMP[p]*(0.35+0.65*Math.pow(thr,0.8))*(0.9+0.2*Math.random());
     if(cutNow){                                                         /* limiter hard cut: no combustion, now and then unburnt fuel spits */
-      if(r<spit)pulse(b,evG*(1.2+1.3*Math.random()),P.crack*(2+2*Math.random()));
+      if(r<spit)pulse(b,evG*(1.2+1.3*Math.random()),P.crack*(2+2*Math.random())*spitCk);
       prevCut=true;return;}
-    if(prevCut){prevCut=false;pulse(b,burn*1.4,P.crack*1.3);return;}    /* first cylinders after the cut fire with a surge */
+    if(prevCut){prevCut=false;pulse(b,burn*1.1,P.crack*(G.lim===2?1.3:0.45));return;}    /* first cylinders after the cut fire with a surge */
     if(cutF>0.01&&r<cutF){pulse(b,burn*0.15,0);return;}                 /* soft cut: dropped cylinder = weak puff */
     if(dfco){                                                           /* overrun: fuel cut, air pumping + crackle */
       if(r<popP)pulse(b,evG*(1.0+1.6*Math.random()),P.crack*(2.2+2*Math.random()));
@@ -698,14 +788,16 @@ function audioInit(){
     const w=A.w,f=w/TAU;rpmB=w*RPM;
     run=A.run;starting=A.starting;thr=A.thr;cutNow=A.cut;cutF=A.cutFrac;
     P=EXH[G.exh]||EXH[1];rpmN=Math.min(1,rpmB/6500);
+    if(A.bangQ>0){const q=Math.min(A.bangQ,3),kk=A.bangK||1;A.bangQ=0;           /* backfire: big low thump + sharp crack in both pipes */
+      for(let k=0;k<q;k++){pulse(0,(3.2+2.2*Math.random())*kk,P.crack*5*kk);pulse(1,(3.2+2.2*Math.random())*kk,P.crack*5*kk);}}
     const evR=Math.max(f*4,1);
     evG=1/Math.sqrt(1+evR/130);
     dfco=run&&thr<0.03&&rpmB>1300&&!cutNow;
     popP=G.pops?A.popLvl*0.06*P.popMul*(0.3+0.7*rpmN):0;
-    spit=(G.lim===2?0.45:0.1)*(0.4+0.6*P.popMul);
+    spit=(G.lim===2?0.45:0.03)*(0.4+0.6*P.popMul);spitCk=G.lim===2?1:0.3;
     const D0=Math.round(sr*P.len[0]),D1=Math.round(sr*P.len[1]),fb=P.fb,kd=P.kd,bw=P.body;
     const ckDec=Math.exp(-dts/0.0012),ieDec=Math.exp(-dts/Math.max(0.002,0.45/evR)),tkDec=Math.exp(-dts/0.0007);
-    const ai=0.03+0.12*rpmN,iAmp=run?2.2*Math.pow(thr,1.6)*(0.2+0.8*rpmN):0,windA=1.2*Math.min(1,A.v/55);
+    const ai=0.03+0.05*rpmN,iAmp=run?1.7*Math.pow(thr,1.6)*(0.2+0.8*rpmN):0,cutK=1-Math.exp(-dts/0.006),windA=1.2*Math.min(1,A.v/55);
     const scOn=run&&A.sc&&G.whine,scA=(0.016+0.03*thr+0.07*A.boost)*Math.min(1,f/8);
     const gwA=(A.gear>0&&A.wIn>20)?0.008*Math.min(1,A.wIn/150)*(0.35+0.65*thr):0,gwF=A.wIn/TAU*29,stF=140+f*28;
     for(let i=0;i<n;i++){
@@ -724,8 +816,8 @@ function audioInit(){
       }
       const nz=Math.random()*2-1;
       inl+=(nz-inl)*ai;ie*=ieDec;tk*=tkDec;lzA+=(nz-lzA)*0.4;const hpn=nz-lzA;wl+=(nz-wl)*0.02;
-      let au=inl*iAmp*(0.45+0.55*Math.min(1,ie))+hpn*tk*0.12+wl*windA*0.1;                          /* intake roar + valvetrain + wind */
-      if(scOn){scp+=TAU*f*12.6*dts;if(scp>TAU)scp-=TAU;au+=scA*(Math.sin(scp)+0.35*Math.sin(2*scp)+0.12*Math.sin(3*scp))+hpn*scA*0.25;}
+      cutS+=((cutNow?1:0)-cutS)*cutK;let au=inl*iAmp*(0.45+0.55*Math.min(1,ie))*(1-0.6*cutS)+hpn*tk*0.12+wl*windA*0.1;                          /* intake roar + valvetrain + wind */
+      if(scOn){scp+=TAU*f*12.6*dts;if(scp>TAU)scp-=TAU;au+=scA*(Math.sin(scp)+0.35*Math.sin(2*scp)+0.12*Math.sin(3*scp))+hpn*scA*0.05;}
       if(gwA>0){gp+=TAU*gwF*dts;if(gp>TAU)gp-=TAU;au+=gwA*(Math.sin(gp)+0.4*Math.sin(2*gp));}       /* gearbox whine */
       if(starting){stp+=TAU*stF*dts;if(stp>TAU)stp-=TAU;au+=0.05*(Math.sin(stp)+0.4*Math.sin(2*stp+0.6));}
       o0[i]=e0;o1[i]=e1;o2[i]=au;
@@ -739,7 +831,7 @@ function audioUpdate(dt){
   const P=EXH[G.exh]||EXH[1],rpm=A.w*RPM,rpmN=Math.min(1,rpm/6500),t=AC.currentTime;
   const fc=Math.min(AC.sampleRate*0.45,P.lp*(0.25+0.45*A.thr+0.3*rpmN));
   nodes.lp.forEach(nd=>nd.frequency.setTargetAtTime(fc,t,0.05));
-  if(audioPrevThr>0.55&&A.thrRaw<0.2&&rpm>2800)A.popLvl=1;     /* lift-off at high rpm -> crackle */
+  if(A.lift){A.lift=false;if(rpm>2800)A.popLvl=1;}     /* lift-off at high rpm -> crackle */
   audioPrevThr=A.thrRaw;
   A.popLvl*=Math.exp(-dt/1.6);
   if(!A.run)A.popLvl=0;
@@ -761,9 +853,12 @@ function hud(dt){
   setT('pw',hudEl.pw,Math.round(S.tqOut)+' Nm · '+Math.round(S.tqOut*S.w/745.7)+' hp');
   if(G.gb){const ratio=S.gear?P.ratios[S.gear]:0,slip=S.gear?Math.abs(S.w-(S.wInShow||0))*RPM:0;
     setT('gbi',hudEl.gbi,(S.gear?'Gear '+S.gear+' · '+ratio.toFixed(2).replace('.',',')+':1':'Neutral')+' · clutch '+Math.round((S.gear?S.clEff:S.cl)*100)+'% · slip '+Math.round(slip)+' rpm');}
-  const s0=1500,e0=preset.limit-100,near=S.run&&rpm>=preset.limit-150,ph=((performance.now()/70)|0)&1;LED.forEach((d,i)=>d.classList.toggle('on',near?!!ph:(S.run&&rpm>=s0+i*(e0-s0)/15)));
+  if(rbLim!==preset.limit)rbSetup();
+  const near=S.run&&rpm>=preset.limit-150,ph=((performance.now()/70)|0)&1;
+  rfill.style.clipPath='inset(0 '+(100-clamp(rpm/RB_MAX*100,0,100)).toFixed(2)+'% 0 0)';
+  rbar.classList.toggle('fl',near&&!!ph);
   if(S.cut>0)cutVis=0.15;else cutVis=Math.max(0,cutVis-dt);cutEl.classList.toggle('on',cutVis>0);
-  hudEl.flame.classList.toggle('on',S.run&&((S.thr>0.9&&(S.map>0.4||rpm>5000))||(S.cut>0&&G.lim===2)||(G.pops&&A.popLvl>0.6&&S.thrE<0.05)));
+  hudEl.flame.classList.toggle('on',S.run&&((S.thr>0.9&&(S.map>0.4||rpm>5000))||(S.cut>0&&G.lim===2)||(G.pops&&A.popLvl>0.6&&S.thrE<0.05)||BF.any));
   setT('load',hudEl.load,'Load '+Math.round(S.thrE*100)+'%');
   const on=S.run;hudEl.st.classList.toggle('run',on);hudEl.bS.classList.toggle('act',!on);hudEl.bT.classList.toggle('act',on);
   fpsN++;fpsT+=dt;if(fpsT>0.6){setT('fps',hudEl.fps,Math.round(fpsN/fpsT)+' fps · '+Math.round(fpsT/fpsN*1000)+' ms');fpsN=0;fpsT=0;}
@@ -783,7 +878,7 @@ function frame(now){
   const rpm=S.w*RPM,bm=preset.boost>0?preset.boost*(0.35+0.65*Math.min(1,rpm/4500)):preset.boost;
   const tgt=S.run?lerp(-0.62,bm,Math.pow(S.thrE,1.5)):(S.starting?-0.25:0);
   S.map+=(tgt-S.map)*(1-Math.exp(-dt/0.12));
-  A.w=S.w;A.run=S.run;A.thr=S.thrE;A.thrRaw=S.thr;A.boost=Math.max(0,S.map);A.cut=S.cut>0;A.cutFrac=S.cutFrac;A.starting=S.starting;A.gear=S.gear;A.wIn=S.wInShow||0;A.v=S.v;audioUpdate(dt);
+  A.w=S.w;A.run=S.run;A.thr=S.thrE;A.thrRaw=S.thr;A.boost=Math.max(0,S.map);A.cut=S.cut>0;A.cutFrac=S.cutFrac;A.starting=S.starting;A.gear=S.gear;A.wIn=S.wInShow||0;A.v=S.v;backfireUpdate(dt);audioUpdate(dt);
   pedalDraw(pG,inp.gas);pedalDraw(pB,inp.brake);
   visuals(dt);camUpdate(dt);renderer.render(scene,camera);hud(dt);
 }
