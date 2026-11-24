@@ -62,8 +62,8 @@ body.light .vbtn{background:rgba(255,255,255,.7)}
 .vbtn.on{border-color:var(--cyan);color:var(--cyan)}
 .toast{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);background:rgba(18,20,28,.94);color:#fff;border:1px solid #333847;padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;z-index:3}
 .toast.show{opacity:1}
-.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;border:1px solid var(--line);border-radius:16px;background:var(--btn);padding:4px;margin:7px 0;flex:none}
-.seg button{height:42px;border:0;border-radius:12px;background:none;font-size:17px;font-weight:600;cursor:pointer}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;border:1px solid var(--line);border-radius:16px;background:var(--btn);padding:4px;margin:7px 0;flex:none}
+.seg button{height:42px;border:0;border-radius:12px;background:none;font-size:14px;white-space:nowrap;font-weight:600;cursor:pointer}
 .seg button.on{background:#e53b2d;color:#fff}
 .ctl{display:grid;grid-template-columns:1fr 1.45fr 1fr;gap:10px;height:clamp(140px,24vh,225px);flex:none}
 .pedal{position:relative;border:1.5px solid var(--line);border-radius:22px;background:var(--btn);overflow:hidden;touch-action:none;cursor:ns-resize}
@@ -89,8 +89,8 @@ body.light .start{background:radial-gradient(circle at 50% 40%,#3a3f4c,#161920);
 .pm button{border:1.5px solid var(--line);border-radius:18px;background:var(--btn);display:grid;place-items:center;cursor:pointer;padding:0}
 .pm button:active,.tb:active,.circ:active{filter:brightness(1.4)}
 .nav{display:grid;grid-template-columns:repeat(6,1fr);flex:none;margin:6px -12px 0;padding:5px 6px 1px;border-top:1px solid var(--line);background:var(--panel)}
-.nv{background:none;border:0;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:13px;font-weight:600;padding:2px 0;cursor:pointer}
-.nv .pill{width:50px;height:38px;border-radius:19px;display:grid;place-items:center}
+.nv{background:none;border:0;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:14px;font-weight:600;padding:2px 0;cursor:pointer}
+.nv .pill{width:58px;height:38px;border-radius:19px;display:grid;place-items:center}
 .nv.on{color:var(--txt)}
 .nv.on .pill{background:rgba(229,59,45,.22);color:var(--red)}
 .sheet{position:absolute;left:12px;right:12px;bottom:78px;max-height:62%;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px 16px;display:none;z-index:6;box-shadow:0 12px 40px rgba(0,0,0,.55)}
@@ -106,26 +106,23 @@ body.light .start{background:radial-gradient(circle at 50% 40%,#3a3f4c,#161920);
 .ratios{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;text-align:center;font-size:12px;color:var(--mut);margin-top:6px}
 .ratios b{display:block;color:var(--txt);font-size:15px}
 #app.imm .head,#app.imm .tabs,#app.imm .seg{display:none}
-.prow{padding:10px 0;border-top:1px solid var(--line)}
-.prow b{font-size:14px}
-.prow small{display:block;color:var(--mut);font-size:12px;margin-top:6px;line-height:1.35}
-.prow .chips{margin-top:7px}
-.dynobox{position:sticky;top:0;z-index:3;background:var(--panel);margin:0 -16px;padding:8px 16px 6px;border-bottom:1px solid var(--line)}
-.dynobox svg{width:100%;height:auto;display:block}
-.dstat{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
-.mrow{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-top:8px}
-.mcell{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--mut);font-weight:600}
-.mcell .mv{color:var(--txt);font-size:12px}
-.mcol{position:relative;width:100%;height:92px;border:1px solid var(--line);border-radius:9px;background:var(--btn);touch-action:none;cursor:ns-resize;overflow:hidden}
-.mz{position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
-.mf{position:absolute;left:0;right:0;background:rgba(56,184,255,.55)}
-.mf.neg{background:rgba(245,180,0,.5)}
-.mf.hot{background:rgba(255,75,62,.6)}
-.hbar{height:8px;width:130px;border-radius:4px;background:rgba(128,140,170,.25);overflow:hidden;margin-top:6px}
-.hbar i{display:block;height:100%;background:var(--green)}
-.cut.knk{border-color:var(--amber);color:var(--amber)}
-.cut.knk.on{background:var(--amber);color:#000}
 @media (max-height:700px){.tb{height:50px}.nv .pill{height:32px}.seg button{height:36px}}
+.r4{margin-top:3px;font-size:12px;color:var(--mut);font-weight:600;font-variant-numeric:tabular-nums}
+.note{font-size:12px;color:var(--mut);margin:6px 0 8px;line-height:1.4}
+.prow{padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.prow small{display:block;color:var(--mut);font-size:12px;margin:2px 0 7px}
+.tsum{margin:8px 0;padding:9px 11px;border:1px solid var(--line);border-radius:12px;font-size:15px}
+.tsum small{display:inline;margin-left:8px;color:var(--mut);font-size:12px}
+.wtag{display:inline-block;margin:6px 5px 0 0;padding:3px 9px;border-radius:8px;font-size:12px;font-weight:700}
+.wtag.bad{background:rgba(255,75,62,.18);color:var(--red)}
+.wtag.mid{background:rgba(245,180,0,.18);color:var(--amber)}
+.wtag.ok{background:rgba(49,224,122,.16);color:var(--green)}
+.mapcv{width:100%;display:block;touch-action:none;border:1px solid var(--line);border-radius:12px;margin-top:8px;background:rgba(128,140,170,.06)}
+.carui{display:none}
+#app.car .carui{display:grid}
+.vbtn.cl1{left:76px}.vbtn.cl2{left:136px}.vbtn.cr1{right:76px}
+.attr{position:absolute;right:8px;top:6px;max-width:44%;font-size:9px;line-height:1.25;color:var(--mut);text-align:right;pointer-events:none;display:none;opacity:.8}
+#app.car .attr{display:block}
 </style>
 </head>
 <body>
@@ -148,7 +145,7 @@ body.light .start{background:radial-gradient(circle at 50% 40%,#3a3f4c,#161920);
     <span style="color:var(--green)"><svg width="16" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg><i id="stFps" style="font-style:normal">60 fps</i></span>
     <span style="color:var(--mut)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><i id="stLoad" style="font-style:normal;color:var(--txt)">Load 0%</i></span>
   </div>
-  <div class="leds" id="leds"><span class="cut" id="cut">CUT</span><span class="cut knk" id="knk">KNOCK</span>
+  <div class="leds" id="leds"><span class="cut" id="cut">CUT</span>
     <span class="flame" id="flame"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg></span>
     <button class="snap" id="snap" aria-label="Snapshot"><svg width="30" height="26" viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="5" width="17" height="14" rx="3.5"/><path d="M19 10l8-4v12l-8-4z"/></svg></button></div>
   <div class="vp" id="vp">
@@ -157,13 +154,14 @@ body.light .start{background:radial-gradient(circle at 50% 40%,#3a3f4c,#161920);
       <div class="r1"><div class="gbox" id="gbox">N</div><div class="rpm"><span id="rpm">0</span><small>RPM</small></div></div>
       <div class="r2"><span><i id="kmh" style="font-style:normal">0</i><small>km/h</small></span><span class="bar"><i id="bar" style="font-style:normal">0,00</i><small style="color:var(--cyan)">bar</small></span></div>
       <div class="r3" id="pw"></div>
+      <div class="r4" id="tuneHud"></div>
       <div class="gbinfo" id="gbinfo"></div>
     </div>
     <button class="vbtn on" id="slow" style="left:16px" aria-label="Slow motion"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8L4 8.5"/><path d="M4 4v4.5h4.5M12 8v4.5l3 1.8"/></svg></button>
     <button class="vbtn" id="full" style="right:16px" aria-label="Immersive"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
     <div class="toast" id="toast"></div>
   </div>
-  <div class="seg" id="seg"><button data-m="live">Live drive</button><button data-m="sim" class="on">Drive sim</button><button data-m="garage">Garage rev</button></div>
+  <div class="seg" id="seg"><button data-m="live">Live drive</button><button data-m="sim" class="on">Drive sim</button><button data-m="garage">Garage rev</button><button data-m="car">Car drive</button></div>
   <div class="ctl">
     <div class="pedal brake" id="pBrake"><div class="gr"></div><div class="fill"></div><div class="pct">0%</div><div class="lev"><svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M8 20l-3-1 4-9-2-1 .8-1.7 4.2 1.9-.9 2L17 9.5l-1.5-3L17.3 5.6 20 11l-12 9z" opacity=".95"/><circle cx="8.5" cy="5" r="1.7"/></svg></div><div class="lbl">BRAKE</div></div>
     <div class="mid">
@@ -176,9 +174,9 @@ body.light .start{background:radial-gradient(circle at 50% 40%,#3a3f4c,#161920);
   <div class="nav" id="nav">
     <button class="nv on" data-t="dash"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4.5 18a8.5 8.5 0 1 1 15 0"/><path d="M12 14l3.5-5"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/></svg></div>Dash</button>
     <button class="nv" data-t="garage"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg></div>Garage</button>
-    <button class="nv" data-t="tune"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>Tune</button>
     <button class="nv" data-t="sound"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></div>Sound</button>
     <button class="nv" data-t="drive"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4v16M12 4v16M18 4v16M6 12h12"/><circle cx="6" cy="4" r="1.6"/><circle cx="12" cy="4" r="1.6"/><circle cx="18" cy="4" r="1.6"/><circle cx="6" cy="20" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg></div>Drive</button>
+    <button class="nv" data-t="tune"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></div>Tune</button>
     <button class="nv" data-t="more"><div class="pill"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></div>More</button>
   </div>
 </div>
@@ -188,50 +186,41 @@ body.light .start{background:radial-gradient(circle at 50% 40%,#3a3f4c,#161920);
 const D2R=Math.PI/180,TAU=Math.PI*2,RPM=9.5493;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const lerp=(a,b,t)=>a+(b-a)*t;
-const alt=n=>Array.from({length:n},(_,i)=>i&1),both=n=>Array(n).fill(2),ampv=(n,s,d)=>Array.from({length:n},(_,i)=>+(1+d*Math.sin(i*2.1+s)).toFixed(2));
-/* hp = factory claim, fi = none | sc | turbo, boost in bar, bk = exhaust pipe per firing event (0/1 = bank, 2 = both), sb = body-tone weights, len = pipe length factor, eg = loudness */
 const PRESETS=[
- {name:'Supercharged V8 6.2',sub:'6,2 L · V8 · Supercharged',hp:650,ref:'Cross-plane blower V8',cfg:'V8',cyl:8,limit:6600,fi:'sc',boost:1.0,
-  m:1700,Ie:0.55,idle:850,fk:1,bk:[1,0,1,0,0,1,0,1],amp:[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78],sb:[1,1,1,1],len:1,eg:1,
+ {name:'Supercharged V8 6.2',sub:'6,2 L · V8 · Supercharged · 650 hp',limit:6600,boost:1.0,sc:true,
   tq:[[0,0],[500,200],[800,430],[1500,640],[2500,790],[3500,850],[4500,860],[5500,820],[6200,745],[7000,600]]},
- {name:'Aspirated V8 6.2',sub:'6,2 L · V8 · Naturally aspirated',hp:430,ref:'Cross-plane NA V8',cfg:'V8',cyl:8,limit:6600,fi:'none',boost:-0.05,
-  m:1700,Ie:0.55,idle:850,fk:1,bk:[1,0,1,0,0,1,0,1],amp:[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78],sb:[1,1,1,1],len:1,eg:1,
+ {name:'Aspirated V8 6.2',sub:'6,2 L · V8 · Naturally aspirated · 430 hp',limit:6600,boost:-0.05,sc:false,
   tq:[[0,0],[500,150],[800,320],[1500,460],[2500,530],[3500,570],[4500,585],[5500,570],[6200,520],[7000,420]]},
- {name:'Track V8 7.0',sub:'7,0 L · V8 · Naturally aspirated',hp:560,ref:'Big-bore track V8',cfg:'V8',cyl:8,limit:7400,fi:'none',boost:-0.05,
-  m:1700,Ie:0.55,idle:850,fk:1,bk:[1,0,1,0,0,1,0,1],amp:[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78],sb:[1,1,1,1],len:1,eg:1,
-  tq:[[0,0],[500,150],[800,300],[1500,430],[2500,520],[3500,600],[4500,650],[5500,680],[6500,640],[7500,540],[8200,420]]},
- {name:'Twin-turbo V8 5.5',sub:'5,5 L · V8 flat-plane · Twin-turbo',hp:1064,ref:'Like the Corvette ZR1 (LT7)',cfg:'V8',cyl:8,limit:8000,fi:'turbo',boost:1.5,lag:0.15,sp:1700,
-  m:1650,Ie:0.45,idle:800,fk:0.89,bk:alt(8),amp:[1,0.98,1,0.97,1,0.98,1,0.97],sb:[0.9,1,1.15,1.3],len:1,eg:1,
-  tq:[[0,0],[500,220],[800,430],[1500,720],[2200,960],[3000,1085],[4000,1105],[5000,1118],[6000,1123],[7000,1082],[8000,930],[8800,700]]},
- {name:'Flat-plane V8 5.5',sub:'5,5 L · V8 flat-plane · Naturally aspirated',hp:670,ref:'Like the Corvette Z06 (LT6)',cfg:'V8',cyl:8,limit:8600,fi:'none',boost:-0.05,
-  m:1560,Ie:0.38,idle:850,fk:0.89,bk:alt(8),amp:[1,0.98,1,0.97,1,0.98,1,0.97],sb:[0.75,0.9,1.2,1.45],len:1,eg:1,
-  tq:[[0,0],[500,160],[800,300],[1500,430],[2500,500],[3500,540],[4500,575],[5500,605],[6300,624],[7000,618],[8000,590],[8400,568],[8800,500],[9400,330]]},
- {name:'Twin-turbo V8 4.0',sub:'4,0 L · V8 · Twin-turbo',hp:585,ref:'Like the AMG GT 63 (M177)',cfg:'V8',cyl:8,limit:7000,fi:'turbo',boost:1.2,lag:0.3,sp:1600,
-  m:1950,Ie:0.46,idle:800,fk:0.65,bk:[1,0,1,0,0,1,0,1],amp:[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78],sb:[1.1,1,0.9,0.8],len:1,eg:1,
-  tq:[[0,0],[500,170],[800,330],[1500,610],[2000,760],[2500,800],[4500,800],[5500,757],[6000,695],[6500,640],[7000,560],[7500,450],[8200,260]]},
- {name:'V12 6.5',sub:'6,5 L · V12 · Naturally aspirated',hp:830,ref:'Like the Ferrari 12Cilindri (F140)',cfg:'V12',cyl:12,limit:9500,fi:'none',boost:-0.05,
-  m:1700,Ie:0.42,idle:900,fk:1.05,bk:alt(12),amp:ampv(12,1,0.03),sb:[0.45,0.75,1.2,1.6],len:1.15,eg:0.9,
-  tq:[[0,0],[500,160],[800,300],[1500,430],[2500,500],[3500,560],[4500,610],[5500,650],[6500,672],[7250,678],[8000,668],[8700,652],[9250,640],[9800,540],[10400,330]]},
- {name:'V10 5.2',sub:'5,2 L · V10 · Naturally aspirated',hp:631,ref:'Like the Lamborghini Huracán Tecnica',cfg:'V10',cyl:10,limit:8500,fi:'none',boost:-0.05,
-  m:1450,Ie:0.36,idle:850,fk:0.84,bk:alt(10),amp:ampv(10,2,0.04),sb:[0.55,0.85,1.2,1.5],len:1.05,eg:0.95,
-  tq:[[0,0],[500,140],[800,280],[1500,400],[2500,450],[3500,490],[4500,520],[5500,545],[6500,565],[7500,568],[8000,562],[8500,520],[9000,430],[9600,260]]},
- {name:'Twin-turbo V6 3.0',sub:'3,0 L · V6 120° · Twin-turbo',hp:654,ref:'Like the Ferrari 296 GTB (engine only)',cfg:'V6',cyl:6,limit:8500,fi:'turbo',boost:1.5,lag:0.22,sp:1700,
-  m:1470,Ie:0.27,idle:900,fk:0.48,bk:alt(6),amp:ampv(6,3,0.04),sb:[0.65,0.9,1.15,1.35],len:0.95,eg:1,
-  tq:[[0,0],[500,120],[800,230],[1500,380],[2500,520],[3500,610],[4500,690],[5500,730],[6250,740],[7000,650],[7500,615],[8000,582],[8500,520],[9000,400],[9600,230]]},
- {name:'Flat-6 4.0',sub:'4,0 L · Flat-6 · Naturally aspirated',hp:510,ref:'Like the Porsche 911 GT3',cfg:'F6',cyl:6,limit:9000,fi:'none',boost:-0.05,
-  m:1435,Ie:0.3,idle:900,fk:0.65,bk:alt(6),amp:ampv(6,4,0.04),sb:[0.7,0.9,1.2,1.4],len:0.95,eg:1.05,
-  tq:[[0,0],[500,130],[800,250],[1500,330],[2500,380],[3500,415],[4500,440],[5500,462],[6300,470],[7200,462],[8400,432],[9000,400],[9600,300],[10200,150]]},
- {name:'Twin-turbo I6 3.0',sub:'3,0 L · Inline-6 · Twin-turbo',hp:510,ref:'Like the BMW M3 (S58)',cfg:'I6',cyl:6,limit:7200,fi:'turbo',boost:1.4,lag:0.28,sp:1800,
-  m:1750,Ie:0.33,idle:800,fk:0.48,bk:both(6),amp:ampv(6,5,0.04),sb:[0.8,0.95,1.1,1.2],len:0.9,eg:1,
-  tq:[[0,0],[500,140],[800,260],[1500,430],[2000,600],[2750,650],[4000,650],[5000,630],[6250,581],[7000,500],[7600,400],[8200,250]]},
- {name:'Turbo I4 2.0',sub:'2,0 L · Inline-4 · Turbo',hp:315,ref:'Like the Honda Civic Type R',cfg:'I4',cyl:4,limit:7200,fi:'turbo',boost:1.1,lag:0.4,sp:1900,
-  m:1430,Ie:0.2,idle:800,fk:0.4,bk:both(4),amp:ampv(4,6,0.06),sb:[0.6,0.85,1.1,1.4],len:0.8,eg:1.15,
-  tq:[[0,0],[500,90],[800,160],[1500,290],[2000,390],[2600,420],[4000,420],[5000,395],[6000,360],[6500,348],[7000,300],[7500,220],[8100,100]]},
- {name:'Turbo I3 1.6',sub:'1,6 L · Inline-3 · Turbo',hp:300,ref:'Like the Toyota GR Yaris',cfg:'I3',cyl:3,limit:7000,fi:'turbo',boost:1.2,lag:0.45,sp:2200,
-  m:1300,Ie:0.16,idle:850,fk:0.4,bk:both(3),amp:ampv(3,7,0.06),sb:[0.85,1,1.05,1.2],len:0.8,eg:1.25,
-  tq:[[0,0],[500,70],[800,140],[1500,250],[2000,320],[3000,385],[4000,395],[5000,380],[6000,350],[6500,335],[7000,300],[7500,200]]}
+ {name:'Track V8 7.0',sub:'7,0 L · V8 · Naturally aspirated · 560 hp',limit:7400,boost:-0.05,sc:false,
+  tq:[[0,0],[500,150],[800,300],[1500,430],[2500,520],[3500,600],[4500,650],[5500,680],[6500,640],[7500,540],[8200,420]]}
 ];
 let preset=PRESETS[0];
+PRESETS[0].kind='sc';PRESETS[1].kind='na';PRESETS[2].kind='na';
+function mkTq(o){const Tp=o.hp*745.7*RPM/o.rP,pk=Math.max(o.pk,Tp),lf=o.hyb?0.8:(o.turbo||o.sc)?0.62:0.36;
+  const raw=[[0,0],[500,pk*(o.hyb?0.3:o.turbo?0.14:0.18)],[1000,pk*lf*0.72],[1500,pk*lf],
+    [2500,pk*((o.turbo||o.hyb||o.sc)?0.92:lf+(1-lf)*0.35)],[o.rT,pk],[o.rP,Tp],[o.lim,Tp*0.9],[o.lim+800,Tp*0.7]];
+  const out=[];raw.forEach(p=>{if(!out.length||p[0]>out[out.length-1][0]+1)out.push([p[0],Math.round(p[1])]);});return out;}
+/* modern engines: simulated figures based on published specs (approximate) */
+PRESETS.push(
+ {name:'Ferrari 296 GTB',sub:'3,0 L · V6 · Twin-turbo hybrid · ~830 hp',kind:'turbo',boost:1.2,limit:8500,idle:1000,Ie:0.36,mass:1470,cyl:6,res:1.15,rn:7600,
+  tq:mkTq({pk:740,rT:6250,hp:830,rP:8000,lim:8500,turbo:true,hyb:true})},
+ {name:'Porsche 911 Turbo S',sub:'3,6 L · Flat-6 · Twin-turbo · ~700 hp',kind:'turbo',boost:1.3,limit:7200,idle:850,Ie:0.40,mass:1640,cyl:6,res:1.1,rn:6400,
+  tq:mkTq({pk:800,rT:4000,hp:700,rP:6500,lim:7200,turbo:true})},
+ {name:'Porsche 911 GT3',sub:'4,0 L · Flat-6 · Naturally aspirated · ~510 hp',kind:'na',boost:-0.05,limit:9000,idle:950,Ie:0.34,mass:1435,cyl:6,res:1.2,rn:8000,
+  tq:mkTq({pk:470,rT:6100,hp:510,rP:8400,lim:9000})},
+ {name:'Toyota GR Yaris 1.6 T',sub:'1,6 L · 3-cyl · Turbo · ~300 hp',kind:'turbo',boost:1.4,limit:7000,idle:1000,Ie:0.26,mass:1280,cyl:3,res:1.0,lope:1.5,rn:6200,
+  tq:mkTq({pk:370,rT:4200,hp:300,rP:6500,lim:7000,turbo:true})},
+ {name:'BMW M3 Competition',sub:'3,0 L · Inline-6 · Twin-turbo · ~510 hp',kind:'turbo',boost:1.3,limit:7200,idle:850,Ie:0.42,mass:1730,cyl:6,res:1.05,rn:6400,
+  tq:mkTq({pk:650,rT:4200,hp:490,rP:6250,lim:7200,turbo:true})},
+ {name:'Mercedes-AMG A 45 S',sub:'2,0 L · Inline-4 · Turbo · ~420 hp',kind:'turbo',boost:1.6,limit:7200,idle:1000,Ie:0.30,mass:1600,cyl:4,res:1.3,rn:6400,
+  tq:mkTq({pk:500,rT:5000,hp:421,rP:6750,lim:7200,turbo:true})},
+ {name:'Lamborghini Revuelto V12',sub:'6,5 L · V12 · Naturally aspirated · ~825 hp',kind:'na',boost:-0.05,limit:9500,idle:900,Ie:0.62,mass:1772,cyl:12,res:1.1,rn:8400,
+  tq:mkTq({pk:725,rT:6750,hp:825,rP:9250,lim:9500})},
+ {name:'Corvette Z06 LT6',sub:'5,5 L · Flat-plane V8 · Naturally aspirated · ~670 hp',kind:'na',boost:-0.05,limit:8600,idle:1000,Ie:0.48,mass:1560,cyl:8,
+  bk:[0,1,0,1,0,1,0,1],amp:[1,0.97,1.02,0.96,1,0.98,1.01,0.97],res:1.12,rn:7600,
+  tq:mkTq({pk:624,rT:6300,hp:670,rP:8400,lim:8600})}
+);
+PRESETS.forEach(p=>{p.limit0=p.limit;if(p.cyl)p.gearK=clamp(p.limit/6600,1,1.45);});
 let mode='sim';
 const R_CR=4.6,L_ROD=15.2,PINX=[-16.5,-5.5,5.5,16.5],PIN_DEG=[45,135,315,225],FIRE=[1,8,7,2,6,5,4,3];
 const CYL=[];
@@ -243,7 +232,7 @@ function valveH(cd,mid,dur){const d=((cd-mid+360)%720+720)%720-360,u=d/(dur/2);r
 
 const P={m:1700,rw:0.34,fd:3.73,ratios:[0,2.66,1.78,1.30,1.00,0.74,0.50],Ie:0.55,i0:1.5};
 const S={run:false,starting:false,startT:0,runT:0,w:0,v:0,gear:0,cl:1,clT:1,clEff:1,shift:null,thr:0,thrE:0,brk:0,blip:0,
-  idle:0,idleI:0.1,cut:0,cutT:0,cutFrac:0,map:0,Te:0,Tcl:0,tqOut:0,auto:false,autoCD:0,wInN:0,stalled:0,spool:0,pf:1,kn:0,blown:false};
+  idle:0,idleI:0.1,cut:0,cutT:0,cutFrac:0,map:0,Te:0,Tcl:0,tqOut:0,auto:false,autoCD:0,wInN:0,stalled:0,fmax:1e9,xF:0,Fwu:0};
 function tq(rpm){const t=preset.tq;if(rpm<=0)return 0;
   for(let i=1;i<t.length;i++){if(rpm<=t[i][0]){const a=t[i-1],b=t[i];return lerp(a[1],b[1],(rpm-a[0])/(b[0]-a[0]));}}
   const l=t[t.length-1];return l[1]*Math.max(0,1-(rpm-l[0])/1500);}
@@ -251,19 +240,19 @@ function physics(dt){
   const tot=P.ratios[S.gear]*P.fd, rpm0=S.w*RPM;
   if(S.starting){S.startT+=dt;if(S.startT>0.9&&S.w>20){S.starting=false;S.run=true;S.runT=0;S.idleI=0.12;}}
   if(S.run){
-    const tgt=preset.idle+350*Math.exp(-S.runT/2.5),err=tgt-rpm0;
+    const tgt=(preset.idle||850)+350*Math.exp(-S.runT/2.5),err=tgt-rpm0;
     S.idleI=clamp(S.idleI+err*0.0005*dt,0,0.35);
     S.idle=clamp(S.idleI+err*0.0004,0,0.5);
     S.runT+=dt;
   }else S.idle=0;
   const thrE=S.run?Math.max(S.thr,S.idle,S.blip):0;S.thrE=thrE;
   let auto=1;
-  if(S.gear>0){const rin=S.v/P.rw*tot*RPM;if(rin<1200){auto=clamp((rpm0-900)/800,0,1);auto=auto*auto*(3-2*auto);}}
+  if(S.gear>0){const rin=S.v/P.rw*tot*RPM;if(rin<1200){const cs=(S.launch&&S.thr>0.5)?Math.min(3000,preset.limit0*0.42):900;auto=clamp((rpm0-cs)/800,0,1);auto=auto*auto*(3-2*auto);}}
   S.cl+=(S.clT-S.cl)*Math.min(1,dt*18);
   S.clEff=S.cl*auto;
   const n=Math.max(1,Math.ceil(dt/0.0005)),h=dt/n,mEff=P.m*1.06;
   for(let i=0;i<n;i++){
-    const w=S.w,rpm=w*RPM,fr=(28+0.035*w+(1-thrE)*(25+0.09*w))*preset.fk;
+    const w=S.w,rpm=w*RPM,fr=28+0.035*w+(1-thrE)*(25+0.09*w);
     let Te;
     if(S.run){const lim=preset.limit,st=G.lim;let cf;
       if(st===1){cf=clamp((rpm-(lim-260))/260,0,1);S.cut=cf>0.3?1:0;}                 /* soft: progressive cylinder drop */
@@ -271,18 +260,18 @@ function physics(dt){
         if(S.cut>0){S.cutT+=h;if(S.cutT>0.08&&rpm<lim-hy)S.cut=0;}
         else if(rpm>=lim){S.cut=1;S.cutT=0;}
         cf=S.cut>0?1:clamp((rpm-(lim-90))/90,0,1)*0.35;}                              /* a few cylinders drop just before the cut */
-      S.cutFrac=cf;Te=tq(rpm)*Math.pow(thrE,1.1)*(1-cf)*S.pf-fr;}
-    else if(S.starting)Te=260*Math.max(0,1-w/40)-(53+0.125*w)*0.8*preset.fk;
-    else Te=-(53+0.125*w)*0.8*preset.fk;
+      S.cutFrac=cf;Te=tqT(rpm)*Math.pow(thrE,1.1)*(1-cf)-fr;}
+    else if(S.starting)Te=260*Math.max(0,1-w/40)-(53+0.125*w)*0.8;
+    else Te=-(53+0.125*w)*0.8;
     if(!S.run){S.cut=0;S.cutFrac=0;}
     let Tcl=0,Fw=0;
-    if(S.gear>0){const wIn=S.v/P.rw*tot;Tcl=preset.clk*S.clEff*Math.tanh((w-wIn)/8);Fw=Tcl*tot*0.92/P.rw;}
+    if(S.gear>0){const wIn=S.v/P.rw*tot;Tcl=1600*S.clEff*Math.tanh((w-wIn)/8);Fw=Tcl*tot*0.92/P.rw;if(Fw>S.fmax){Tcl*=S.fmax/Fw;Fw=S.fmax;}}
     S.w=Math.max(0,w+(Te-Tcl)/P.Ie*h);
-    const v=S.v,Fres=0.5*1.2*0.32*2.3*v*v+0.012*P.m*9.81+S.brk*0.95*P.m*9.81;
+    const v=S.v,Fres=0.5*1.2*0.32*2.3*v*v+0.012*P.m*9.81+S.brk*0.95*P.m*9.81+S.xF;
     if(v<=0.001&&Fw<=Fres)S.v=0;else S.v=Math.max(0,v+(Fw-Fres)/mEff*h);
-    S.Te=Te;S.Tcl=Tcl;
+    S.Te=Te;S.Tcl=Tcl;S.Fwu=Fw;
   }
-  S.tqOut=S.run?tq(S.w*RPM)*Math.pow(thrE,1.1)*(1-S.cutFrac)*S.pf:0;
+  S.tqOut=S.run?tqT(S.w*RPM)*Math.pow(thrE,1.1)*(1-S.cutFrac):0;
   if(S.run&&S.w*RPM<300){S.run=false;S.stalled=1;}
 }
 function requestShift(dir){
@@ -305,149 +294,14 @@ function autoShift(dt){
   if(!S.auto||S.shift||mode!=='sim'||S.autoCD>0||!S.run)return;
   const rpm=S.w*RPM;
   if(S.gear===0){if(S.thr>0.08){requestShift(1);S.autoCD=0.8;}return;}
-  if(S.gear<6&&rpm>preset.limit-500&&S.thr>0.2){requestShift(1);S.autoCD=0.8;}
+  if(S.gear<6&&Math.min(rpm,(S.v/P.rw*P.ratios[S.gear]*P.fd*RPM)*1.04+400)>preset.limit-500&&S.thr>0.2){requestShift(1);S.autoCD=0.8;}
   else if(S.gear>1&&(rpm<1800||(S.thr>0.85&&rpm<3600))){requestShift(-1);S.autoCD=0.8;}
 }
-//<TUNECORE>
-const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x);};
-const PART_KEYS=['in','cam','ex','fi','ic','int','fuel','fw','cl','fd','wt'];
-const FI_NA=[{n:'None',d:'Naturally aspirated'},
- {n:'Supercharger',d:'Roots blower: instant boost and the whine. Adds 0,55 bar',sc:1,bAdd:0.55,oct:0.35},
- {n:'Turbo',d:'Single turbo kit: big top end, noticeable lag. Adds 0,8 bar',turbo:1,bAdd:0.8,lag:0.5,sp:2600,oct:0.55},
- {n:'Twin-turbo',d:'Two smaller turbos: quicker spool. Adds 1,0 bar',turbo:1,bAdd:1.0,lag:0.36,sp:2200,oct:0.72}];
-const FI_SC=[{n:'Stock',d:'Factory blower and pulley'},
- {n:'Small pulley',d:'Spins the blower faster: +0,25 bar',bAdd:0.25},
- {n:'Big blower',d:'Larger rotors: +0,5 bar. Wants better fuel and cooling',bAdd:0.5}];
-const FI_TU=[{n:'Stock',d:'Factory turbos'},
- {n:'Hybrid turbos',d:'+0,3 bar, a little more lag',bAdd:0.3,lag:0.12,sp:300},
- {n:'Big turbos',d:'+0,6 bar, a lot more lag. Needs support parts',bAdd:0.6,lag:0.25,sp:700,oct:0.1}];
-const PARTS={
- in:{t:'Air intake',o:[
-  {n:'Stock',d:'Factory airbox'},
-  {n:'Sport filter',d:'Less restriction, a bit more intake sound',g:[1,1.02],snd:1.15},
-  {n:'Cold air',d:'Cooler, denser air: +4% on top',g:[0.995,1.04],snd:1.35},
-  {n:'Big throttle',d:'Large throttle body and plenum: +7% on top, weaker low-end',g:[0.98,1.07],snd:1.6}]},
- cam:{t:'Camshafts',o:[
-  {n:'Stock',d:'Smooth idle, broad torque'},
-  {n:'Stage 1',d:'More top end, lumpy idle, safe rpm +200',g:[0.97,1.04],rpm:200,lope:0.5},
-  {n:'Stage 2',d:'Big top end, weak low-end, safe rpm +450',g:[0.92,1.09],rpm:450,lope:1.3,idle:150},
-  {n:'Race',d:'Peaky and rough, stiff springs: safe rpm +800',g:[0.84,1.15],rpm:800,lope:2.4,idle:350}]},
- ex:{t:'Exhaust',o:[
-  {n:'Stock',d:'Quiet and restrictive',voice:0},
-  {n:'Cat-back',d:'Sport mufflers, deeper tone',g:[1,1.025],voice:1},
-  {n:'Headers',d:'Long-tube headers and race pipes. Loud',g:[1.01,1.06],voice:2}]},
- ic:{t:'Intercooler',o:[
-  {n:'Stock',d:'Factory charge cooling'},
-  {n:'Upgraded',d:'Cooler charge air: more knock margin',g:[1,1.012],oct:0.15},
-  {n:'Race',d:'Air-to-water: much more knock margin',g:[1,1.025],oct:0.3}]},
- int:{t:'Internals',o:[
-  {n:'Stock',d:'Factory pistons and rods'},
-  {n:'Forged',d:'Forged pistons and rods: safe boost +0,35 bar, rpm +300',b:0.35,rpm:300,oct:0.05},
-  {n:'Race',d:'Race rods and light pistons: safe boost +0,9 bar, rpm +900',b:0.9,rpm:900,oct:0.1,ie:0.92}]},
- fuel:{t:'Fuel',o:[
-  {n:'91 RON',d:'Pump fuel'},
-  {n:'98 RON',d:'Premium: more knock margin, +0,8%',g:[1,1.008],oct:0.15},
-  {n:'E85',d:'Race fuel: lots of knock margin, +3,5% on top',g:[1.005,1.035],oct:0.4}]},
- fw:{t:'Flywheel',o:[
-  {n:'Stock',d:'Factory flywheel'},
-  {n:'Light',d:'Revs faster: 25% less inertia',ie:0.75},
-  {n:'Race',d:'Revs very fast: 40% less inertia',ie:0.6}]},
- cl:{t:'Clutch',o:[
-  {n:'Stock',d:'Holds 1600 Nm before it slips'},
-  {n:'Sport',d:'Holds 40% more torque',k:1.4},
-  {n:'Race',d:'Holds 90% more torque',k:1.9}]},
- fd:{t:'Final drive',o:[
-  {n:'Stock',d:'3,73'},
-  {n:'Long',d:'3,43: higher top speed, slower pull',f:0.92},
-  {n:'Short',d:'4,10: stronger pull, lower top speed',f:1.1}]},
- wt:{t:'Weight',o:[
-  {n:'Stock',d:'Factory curb weight'},
-  {n:'Light',d:'Lighter panels and glass: -90 kg',m:-90},
-  {n:'Track',d:'Race seats, no rear seats, no sound deadening: -200 kg',m:-200}]}
-};
-const TUNES={};
-const TRIM_X=[0.14,0.28,0.42,0.56,0.68,0.80,0.91,1.0];
-const RESP=['Soft','Linear','Sport','Sport+'];
-const MAPN=['Flat','Low-end','Top-end'],MAPT=[[0,0,0,0,0,0,0,0],[10,8,5,2,0,-3,-6,-8],[-8,-6,-3,0,3,6,8,10]];
-function freshTune(){return{p:{},e:{trim:[0,0,0,0,0,0,0,0],fuel:0,adv:0,resp:1}};}
-function tn(i){return TUNES[i]||(TUNES[i]=freshTune());}
-function partList(b,k){if(k==='fi')return b.fi==='none'?FI_NA:b.fi==='sc'?FI_SC:FI_TU;return PARTS[k].o;}
-function partOpt(i,k){const l=partList(PRESETS[i],k);return l[clamp(tn(i).p[k]|0,0,l.length-1)];}
-function baseTq(b,rpm){const t=b.tq;if(rpm<=0)return 0;
-  for(let i=1;i<t.length;i++){if(rpm<=t[i][0]){const a=t[i-1],c=t[i];return lerp(a[1],c[1],(rpm-a[0])/(c[0]-a[0]));}}
-  const l=t[t.length-1];return l[1]*Math.max(0,1-(rpm-l[0])/1500);}
-/* turns base data + chosen parts + ECU settings into the engine the simulator runs */
-function buildEngine(i,stock){
-  const b=PRESETS[i],T=stock?freshTune():tn(i),O={};
-  PART_KEYS.forEach(k=>{const l=partList(b,k);O[k]=l[clamp(T.p[k]|0,0,l.length-1)];});
-  const fi=O.fi,L0=b.limit,bStock=b.fi==='none'?0:b.boost;
-  const turbo=b.fi==='turbo'||!!fi.turbo,sc=b.fi==='sc'||!!fi.sc,boosted=turbo||sc;
-  const bDef=bStock+(fi.bAdd||0),bMax=bDef+0.7;
-  const bSet=boosted?clamp(T.e.boost==null?bDef:T.e.boost,0,bMax):0;
-  const lag=turbo?(b.lag||0)+(fi.lag||0):0,spoolRpm=turbo?(b.sp||0)+(fi.sp||0):0;
-  const safe=L0+300+(O.int.rpm||0)+(O.cam.rpm||0),bSafe=bDef+0.25+(O.int.b||0);
-  const limit=clamp(T.e.limit==null?L0:T.e.limit,4000,safe+1500);
-  const e=T.e,adv=e.adv||0,fu=e.fuel||0;
-  const margin=0.2+(boosted&&b.fi!=='none'?0.15:0)+(fi.oct||0)+(O.fuel.oct||0)+(O.int.oct||0)+(boosted?(O.ic.oct||0):0);
-  const frm=r=>turbo?smooth((r-spoolRpm)/1500):sc?0.5+0.5*Math.min(1,r/2500):0;
-  const kb=0.8,bGain=r=>boosted?(1+kb*(bStock+(bSet-bStock)*frm(r)))/(1+kb*bStock):1;
-  const trimAt=r=>{const x=r/L0,tr=e.trim;if(x<=TRIM_X[0])return tr[0];
-    for(let j=1;j<8;j++){if(x<=TRIM_X[j]){return lerp(tr[j-1],tr[j],(x-TRIM_X[j-1])/(TRIM_X[j]-TRIM_X[j-1]));}}return tr[7];};
-  const partG=r=>{const u=smooth((r/L0-0.3)/0.45);let g=1;
-    for(const k of PART_KEYS){const o=O[k];if(o.g&&(k!=='ic'||boosted))g*=lerp(o.g[0],o.g[1],u);}return g;};
-  const fuelD=fu<-2?0.05*(-2-fu):(fu>2?-0.02*(fu-2):0);
-  const knock=r=>{const f=boosted?frm(r):0;
-    const D=0.9*Math.max(0,bSet-bStock)*f+0.05*adv+fuelD+0.012*Math.max(0,trimAt(r))+1.2*Math.max(0,bSet-bSafe)*f;
-    return clamp((D-margin)/0.35,0,1);};
-  const gT=adv>=0?1+0.012*Math.min(adv,4)-0.007*Math.max(0,adv-4):1+0.012*adv,gF=1+0.004*(1-Math.abs(fu-1));
-  const curve=r=>{if(r<=0)return 0;
-    let q=baseTq(b,r)*partG(r)*bGain(r)*gT*gF*(1+trimAt(r)/100);
-    q*=1-0.22*knock(r);if(r>safe)q*=1-clamp((r-safe)/700,0,0.5);return q;};
-  const xs=new Set([0,limit]);b.tq.forEach(p=>xs.add(p[0]));for(let r=0;r<=limit+1500;r+=250)xs.add(r);
-  const tq=[...xs].sort((a,c)=>a-c).map(r=>[r,curve(r)]);
-  const idleDef=b.idle+(O.cam.idle||0);
-  return{i,name:b.name,limit,safe,tq,curve,knock,trimAt,turbo,sc,boosted,bSet,bDef,bMax,bSafe,bStock,lag,spoolRpm,
-    idle:clamp(e.idle==null?idleDef:e.idle,600,1600),idleDef,fk:b.fk,clk:1600*(O.cl.k||1),
-    Ie:b.Ie*(O.fw.ie||1)*(O.int.ie||1),m:b.m+(O.wt.m||0),fd:3.73*(O.fd.f||1),
-    lope:O.cam.lope||0,iloud:O.in.snd||1,cyl:b.cyl,evr:b.cyl/2,bk:b.bk,amp:b.amp,sb:b.sb,lenMul:b.len||1,eg:b.eg||1};}
-function peaks(E){let hp=0,hpR=0,nm=0,nmR=0;
-  for(let r=500;r<=E.limit;r+=50){const q=E.curve(r),h=q*r*0.10472/745.7;if(h>hp){hp=h;hpR=r;}if(q>nm){nm=q;nmR=r;}}
-  return{hp,hpR,nm,nmR};}
-const STKE={},STKP={};
-function stockEng(i){return STKE[i]||(STKE[i]=buildEngine(i,true));}
-function stockPk(i){return STKP[i]||(STKP[i]=peaks(stockEng(i)));}
-function hpShown(i,E){return Math.round(PRESETS[i].hp*peaks(E).hp/stockPk(i).hp);}
-function isTuned(i){const t=TUNES[i];if(!t)return false;const e=t.e;
-  return PART_KEYS.some(k=>(t.p[k]|0)>0)||e.limit!=null||e.boost!=null||e.idle!=null||!!e.adv||!!e.fuel||e.trim.some(x=>x)||e.resp!==1;}
-function dynoHTML(i,E){
-  const S0=stockEng(i),W=320,H=132,L=34,R=34,T=8,B=20,iw=W-L-R,ih=H-T-B;
-  const xMax=Math.ceil((Math.max(E.limit,S0.limit)+400)/1000)*1000,N=Math.round(xMax/100);
-  const tE=[],tS=[],hE=[],hS=[];
-  for(let k=1;k<=N;k++){const r=k*100,a=E.curve(r),c=S0.curve(r);tE.push(a);tS.push(c);hE.push(a*r*0.10472/745.7);hS.push(c*r*0.10472/745.7);}
-  const tm=Math.max(...tE,...tS)*1.06,hm=Math.max(...hE,...hS)*1.06;
-  const X=r=>L+r/xMax*iw,path=(a,m)=>a.map((v,k)=>(k?'L':'M')+X((k+1)*100).toFixed(1)+' '+(T+ih*(1-v/m)).toFixed(1)).join('');
-  let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Inter,system-ui,sans-serif">`;
-  for(let r=0;r<=xMax;r+=1000){s+=`<path d="M${X(r).toFixed(1)} ${T}V${T+ih}" style="stroke:var(--line)" stroke-width="1"/><text x="${X(r).toFixed(1)}" y="${H-6}" font-size="9" text-anchor="middle" style="fill:var(--mut)">${r/1000}</text>`;}
-  let ks=-1;
-  for(let k=1;k<=N+1;k++){const on=k<=N&&E.knock(k*100)>0.05;
-    if(on&&ks<0)ks=k;if(!on&&ks>=0){s+=`<rect x="${X(ks*100).toFixed(1)}" y="${T}" width="${(X((k-1)*100)-X(ks*100)).toFixed(1)}" height="${ih}" style="fill:var(--red)" opacity=".16"/>`;ks=-1;}}
-  s+=`<path d="${path(tS,tm)}" fill="none" style="stroke:var(--cyan)" stroke-width="1.2" stroke-dasharray="3 3" opacity=".5"/>`;
-  s+=`<path d="${path(hS,hm)}" fill="none" style="stroke:var(--amber)" stroke-width="1.2" stroke-dasharray="3 3" opacity=".5"/>`;
-  s+=`<path d="${path(tE,tm)}" fill="none" style="stroke:var(--cyan)" stroke-width="2.2"/>`;
-  s+=`<path d="${path(hE,hm)}" fill="none" style="stroke:var(--amber)" stroke-width="2.2"/>`;
-  s+=`<path d="M${X(E.limit).toFixed(1)} ${T}V${T+ih}" style="stroke:var(--red)" stroke-width="1.6"/>`;
-  if(E.safe<xMax)s+=`<path d="M${X(E.safe).toFixed(1)} ${T}V${T+ih}" style="stroke:var(--amber)" stroke-width="1" stroke-dasharray="2 3"/>`;
-  s+=`<text x="${L-4}" y="${T+8}" font-size="9" text-anchor="end" style="fill:var(--cyan)">${Math.round(tm)}</text><text x="${L-4}" y="${T+19}" font-size="8" text-anchor="end" style="fill:var(--mut)">Nm</text>`;
-  s+=`<text x="${W-R+4}" y="${T+8}" font-size="9" style="fill:var(--amber)">${Math.round(hm)}</text><text x="${W-R+4}" y="${T+19}" font-size="8" style="fill:var(--mut)">hp</text></svg>`;
-  const pk=peaks(E),st=stockPk(i),dl=Math.round((pk.hp/st.hp-1)*100);
-  s+=`<div class="dstat"><span style="color:var(--amber)">${hpShown(i,E)} hp @ ${Math.round(pk.hpR/50)*50}</span><span style="color:var(--cyan)">${Math.round(pk.nm)} Nm @ ${Math.round(pk.nmR/50)*50}</span><span>${dl>0?'+':''}${dl}% vs stock</span></div>`;
-  return s;}
-//</TUNECORE>
 //</SIM>
 
 /* ================= SCENE ================= */
 const $=s=>document.querySelector(s);
-const G={view:0,bf:true,exv:true,op:0.07,slow:true,vib:true,tunnel:true,sound:true,vol:0.7,whine:true,lim:0,exh:1,room:1,pops:true,gb:false,rec:false,light:false,imm:false,dmg:false};
+const G={view:0,bf:true,exv:true,op:0.07,slow:true,vib:true,tunnel:true,sound:true,vol:0.7,whine:true,lim:0,exh:1,room:1,pops:true,gb:false,rec:false,light:false,imm:false};
 const canvas=$('#c'),vp=$('#vp');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
@@ -675,7 +529,7 @@ function backfireUpdate(dt){
   if(S.thr>0.6)BF.hiT=0.5;else BF.hiT=Math.max(0,BF.hiT-dt);
   if(S.thr>0.3)BF.lifted=false;
   if(S.run&&S.thr<0.15&&BF.hiT>0&&!BF.lifted){BF.lifted=true;
-    if(rpm>2800){A.lift=true;if(preset.turbo&&S.spool>0.3)A.bovQ=1;
+    if(rpm>2800){A.lift=true;
       if(G.bf){const n=2+Math.floor(Math.random()*4)+(rpm>5000?2:0);let t=0.04+Math.random()*0.08;
         for(let i=0;i<n;i++){BF.q.push({t,k:0.4+0.6*Math.random()*Math.min(1,rpm/5500)});t+=0.07+Math.random()*0.22;}}}}
   /* "Bangs" limiter: a bang with a flame on most cuts */
@@ -781,15 +635,17 @@ function visuals(dt){
 
 /* ================= UI ================= */
 const el=id=>document.getElementById(id);
-const ledsBox=el('leds'),cutEl=el('cut'),knkEl=el('knk');
+const ledsBox=el('leds'),cutEl=el('cut');
 /* linear rev bar: continuous fill 0..RB_MAX rpm, tick every 1000 rpm, white mark at the limiter */
 let RB_MAX=9000;const rbar=document.createElement('div'),rfill=document.createElement('div'),rred=document.createElement('i');
 rbar.className='rbar';rfill.className='rfill';rred.className='rred';rbar.appendChild(rfill);
+
 rbar.appendChild(rred);ledsBox.insertBefore(rbar,cutEl);
+function buildTicks(){[...rbar.querySelectorAll('.rtick')].forEach(n=>n.remove());
+  for(let k=1000;k<RB_MAX;k+=1000){const t=document.createElement('i');t.className='rtick';t.style.left=(k/RB_MAX*100)+'%';rbar.insertBefore(t,rred);}}
+buildTicks();
 let rbLim=0;
-function rbSetup(){RB_MAX=Math.max(9000,Math.ceil((preset.limit+400)/1000)*1000);
-  rbar.querySelectorAll('.rtick').forEach(t=>t.remove());
-  for(let k=1000;k<RB_MAX;k+=1000){const t=document.createElement('i');t.className='rtick';t.style.left=(k/RB_MAX*100)+'%';rbar.insertBefore(t,rred);}
+function rbSetup(){const need=Math.max(9000,Math.ceil((preset.limit0*1.15+500)/1000)*1000);if(need!==RB_MAX){RB_MAX=need;buildTicks();}
   const L=preset.limit/RB_MAX*100;
   rfill.style.background='linear-gradient(90deg,#31e07a 0%,#31e07a '+(L*0.45).toFixed(1)+'%,#f5b400 '+(L*0.8).toFixed(1)+'%,#ff4b3e '+(L*0.93).toFixed(1)+'%,#ff4b3e 100%)';
   rred.style.left=L+'%';rbLim=preset.limit;}
@@ -808,8 +664,8 @@ function doShift(d){if(mode==='garage'){toast('Gearbox is neutral in Garage rev'
 el('up').onclick=()=>{audioInit();doShift(1);};el('dn').onclick=()=>{audioInit();doShift(-1);};
 function toggleEngine(){audioInit();
   if(S.run){S.run=false;toast('Engine off');return;}
-  if(S.blown){toast('Engine blown. Rebuild it in Tune › ECU');return;}
   if(S.starting)return;
+  if(TUNE.st.health<=0){toast('Engine blown. Repair it in Tune');return;}
   if(S.gear>0&&mode!=='garage'){toast('Shift to N to start the engine');return;}
   S.starting=true;S.startT=0;}
 el('start').onclick=toggleEngine;
@@ -822,8 +678,8 @@ addEventListener('keyup',e=>{const k=e.key.toLowerCase();if(k==='arrowup'||k==='
 /* modes */
 el('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const m=b.dataset.m;
   if(m==='live'){toast('Live drive needs an OBD-II link. Staying in simulation.');return;}
-  mode=m;[...el('seg').children].forEach(x=>x.classList.toggle('on',x.dataset.m===m));
-  if(m==='garage'){S.shift=null;S.gear=0;S.clT=1;S.v=0;toast('Garage rev: gear N, free revving');}else toast('Drive sim');});
+  mode=(m==='car'?'sim':m);if(window.carMode)carMode(m==='car');[...el('seg').children].forEach(x=>x.classList.toggle('on',x.dataset.m===m));
+  if(m==='garage'){S.shift=null;S.gear=0;S.clT=1;S.v=0;toast('Garage rev: gear N, free revving');}else if(m!=='car')toast('Drive sim');});
 /* toggles */
 const setOn=(id,on)=>el(id).classList.toggle('on',!!on);
 function applyGlass(){const o=G.tunnel?G.op:0.6;glassMats.forEach(m=>m.opacity=o);edgeMats.forEach(m=>m.opacity=G.tunnel?0.5:0.25);}
@@ -849,17 +705,22 @@ el('snap').onclick=()=>{renderer.render(scene,camera);const c2=document.createEl
   c2.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='v8-engine.png';a.click();toast('Snapshot saved');});};
 /* presets */
 let presetIdx=0;
-function applyPreset(i){presetIdx=i;rebuild();saveSoon();}
-el('swap').onclick=()=>{applyPreset((presetIdx+1)%PRESETS.length);toast(PRESETS[presetIdx].name);};
+function applyPreset(i){
+  if(TUNE.ready)saveTune();
+  presetIdx=i;preset=PRESETS[i];TUNEDB.sel=i;
+  TUNE.st=normTune(TUNEDB.eng[preset.name]);
+  preset.limit=TUNE.st.limit>0?TUNE.st.limit:preset.limit0;TUNE.st.limit=preset.limit;
+  el('ename').textContent=preset.name;el('esub').textContent=preset.sub;
+  G.exh=[0,1,2,2][TUNE.st.parts.exhaust];
+  tuneEffects();rebuildTune();audioTone();applyVoice();rbSetup();
+  TUNE.ready=true;TUNE.kn=0;}
+el('swap').onclick=()=>{applyPreset((presetIdx+1)%PRESETS.length);toast(preset.name);};
 /* sheets */
 const sheet=el('sheet');let tab='dash';
 const chip=(act,label,on,v)=>`<button class="chip${on?' on':''}" data-act="${act}"${v!==undefined?` data-v="${v}"`:''}>${label}</button>`;
 function renderSheet(){
   let h='';
-  if(tab==='garage'){h='<h3>Garage</h3>'+PRESETS.map((p,i)=>{const E=i===presetIdx?preset:buildEngine(i);
-    return `<div class="row"><div>${p.name}<small>${p.sub} · ${hpShown(i,E)} hp${isTuned(i)?' · tuned':''}</small><small>${p.ref}</small></div>${chip('preset',i===presetIdx?'Selected':'Select',i===presetIdx,i)}</div>`;}).join('')
-   +'<div class="row"><div><small>The animated 3D block is always the V8. Sound, torque, rev range, boost and firing order follow the engine you pick. Use Tune to swap parts and remap.</small></div></div>';}
-  else if(tab==='tune'){h=renderTune();}
+  if(tab==='garage'){h='<h3>Garage</h3><div class="note">The 3D model is a V8 reference for every engine. Torque, rpm, boost, weight and sound follow the engine you pick. Figures are simulated and approximate.</div>'+PRESETS.map((p,i)=>`<div class="row"><div>${p.name}<small>${p.sub}</small></div>${chip('preset',i===presetIdx?'Selected':'Select',i===presetIdx,i)}</div>`).join('');}
   else if(tab==='sound'){h=`<h3>Sound</h3><div class="row"><div>Engine sound</div>${chip('snd',G.sound?'On':'Off',G.sound)}</div>
    <div class="row"><div>Volume</div><input type="range" min="0" max="100" value="${Math.round(G.vol*100)}" data-act="vol"></div>
    <div class="row"><div>Exhaust<small>Tone, bark and rasp</small></div><div class="chips">${EXH.map((p,i)=>chip('exh',p.name,G.exh===i,i)).join('')}</div></div>
@@ -867,24 +728,26 @@ function renderSheet(){
    <div class="row"><div>Overrun crackle<small>Pops when you lift off at high rpm</small></div>${chip('pops',G.pops?'On':'Off',G.pops)}</div>
    <div class="row"><div>Backfire<small>Bangs and flames from the tailpipes on lift-off and in Bangs limiter mode</small></div><div class="chips">${chip('bf',G.bf?'On':'Off',G.bf)}${chip('bfnow','Test',false)}</div></div>
    <div class="row"><div>Room<small>Reverb around the car</small></div><div class="chips">${['Open','Garage','Tunnel'].map((n,i)=>chip('room',n,G.room===i,i)).join('')}</div></div>
-   <div class="row"><div>Blower &amp; turbo sound<small>Supercharger whine, turbo whistle and blow-off</small></div>${chip('whine',G.whine?'On':'Off',G.whine)}</div>`;}
+   <div class="row"><div>Supercharger whine<small>Roots blower pitch follows rpm</small></div>${chip('whine',G.whine?'On':'Off',G.whine)}</div>`;}
   else if(tab==='drive'){h=`<h3>Drive</h3><div class="row"><div>Gearbox</div><div class="chips">${chip('auto','Manual',!S.auto,0)}${chip('auto','Auto',S.auto,1)}</div></div>
-   <div class="row"><div>Rev limiter<small><span id="limv">${preset.limit}</span> rpm</small></div><input type="range" min="4500" max="${Math.ceil((preset.safe+1500)/100)*100}" step="100" value="${preset.limit}" data-act="limrpm"></div>
-   <div class="row"><div>Ratios<small>Final drive ${P.fd.toFixed(2).replace('.',',')} · tyre radius 0,34 m · ${Math.round(P.m)} kg</small></div></div>
+   <div class="row"><div>Rev limiter<small><span id="limv">${preset.limit}</span> rpm</small></div><input type="range" min="${Math.round(preset.limit0*0.6/100)*100}" max="${Math.max(8800,Math.round(preset.limit0*1.15/100)*100)}" step="100" value="${preset.limit}" data-act="limrpm"></div>
+   <div class="row"><div>Ratios<small>Final drive 3,73 · tyre radius 0,34 m · 1700 kg</small></div></div>
    <div class="ratios">${[1,2,3,4,5,6].map(k=>`<div>${k}<b>${P.ratios[k].toFixed(2).replace('.',',')}</b></div>`).join('')}</div>
    <div class="row"><div>Clutch<small>Automatic: opens on every shift, slips on launch</small></div></div>`;}
+  else if(tab==='tune'){h=tuneSheet();}
   else if(tab==='more'){h=`<h3>More</h3><div class="row"><div>Glass opacity</div><input type="range" min="2" max="35" value="${Math.round(G.op*100)}" data-act="op"></div>
    <div class="row"><div>Slow motion</div>${chip('slow',G.slow?'On':'Off',G.slow)}</div>
    <div class="row"><div>Exhaust<small>Headers, pipes and tailpipe flames</small></div>${chip('exv',G.exv?'Shown':'Hidden',G.exv)}</div>
    <div class="row"><div>Camera</div><div class="chips">${['Engine','Gearbox','Exhaust'].map((n,i)=>chip('view',n,G.view===i,i)).join('')}</div></div>
+   ${window.carRows?carRows():''}
    <div class="row"><div>Reset<small>Stops the engine and the car</small></div>${chip('reset','Reset',false)}</div>
    <div class="row"><div>Keys<small>W / ↑ gas · S / ↓ brake · Space start · X / Z shift · drag to orbit, pinch to zoom</small></div></div>`;}
-  const st=sheet.scrollTop;sheet.innerHTML=h;sheet.scrollTop=st;sheet.classList.toggle('show',tab!=='dash');}
+  sheet.innerHTML=h;sheet.classList.toggle('show',tab!=='dash');
+  if(tab==='tune')tuneAfterRender();}
 el('nav').addEventListener('click',e=>{const b=e.target.closest('.nv');if(!b)return;audioInit();const t=b.dataset.t;tab=(t===tab?'dash':t);
   [...el('nav').children].forEach(x=>x.classList.toggle('on',x.dataset.t===tab));renderSheet();});
 sheet.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;const a=b.dataset.act,v=b.dataset.v;
-  if(tuneClick(a,v)){renderSheet();return;}
-  if(a==='preset')applyPreset(+v);else if(a==='snd'){G.sound=!G.sound;setOn('tSound',G.sound);applyVol();}
+  if(tuneAct(a,v)||(window.carAct&&carAct(a,v))){}else if(a==='preset')applyPreset(+v);else if(a==='snd'){G.sound=!G.sound;setOn('tSound',G.sound);applyVol();}
   else if(a==='whine')G.whine=!G.whine;else if(a==='exh'){G.exh=+v;audioTone();}else if(a==='lim')G.lim=+v;else if(a==='pops')G.pops=!G.pops;else if(a==='room'){G.room=+v;applyRoom();}else if(a==='auto')S.auto=v==='1';
   else if(a==='slow'){G.slow=!G.slow;setOn('slow',G.slow);}
   else if(a==='bf')G.bf=!G.bf;else if(a==='bfnow'){audioInit();fireBackfire(1);}
@@ -892,120 +755,10 @@ sheet.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b|
   else if(a==='view'){G.view=+v;G.gb=v==='1';setOn('tGear',G.gb);el('gbinfo').style.display=G.gb?'block':'none';Object.assign(camT,v==='1'?VIEW_GB:v==='2'?VIEW_EX:VIEW_ENGINE);}
   else if(a==='reset'){S.run=false;S.starting=false;S.w=0;S.v=0;S.gear=0;S.shift=null;S.clT=1;S.map=0;S.cut=0;S.cutT=0;S.cutFrac=0;toast('Reset');}
   renderSheet();});
-sheet.addEventListener('input',e=>{const a=e.target.dataset.act;if(a==='vol'){G.vol=e.target.value/100;applyVol();}else if(a==='op'){G.op=e.target.value/100;applyGlass();}else if(a==='limrpm'){ecuInput('e_limit',+e.target.value);const lv=el('limv');if(lv)lv.textContent=preset.limit;}else if(a&&a.startsWith('e_'))ecuInput(a,+e.target.value);});
-
-/* ================= TUNING (parts, ECU remap, dyno) ================= */
-const ENG={h:1};
-let tsub='parts';
-function icoSVG(cfg,cyl){const rows=cfg[0]==='I'?[cyl]:[Math.ceil(cyl/2),Math.floor(cyl/2)],g=4,W=124;let s='';
-  rows.forEach((n,r)=>{const w=(W-(n-1)*g)/n,y=rows.length===1?25:(r?44:6);
-    for(let k=0;k<n;k++)s+=`<rect x="${(3+k*(w+g)).toFixed(1)}" y="${y}" width="${w.toFixed(1)}" height="15" rx="${Math.min(7.5,w/2).toFixed(1)}"/>`;});
-  if(rows.length>1)s+='<path d="M2 33h126" stroke-dasharray="4 6" stroke-width="2"/>';return s;}
-function headerUpdate(){const b=PRESETS[presetIdx];
-  el('ename').textContent=b.name;
-  el('esub').textContent=b.sub+' · '+hpShown(presetIdx,preset)+' hp'+(isTuned(presetIdx)?' · tuned':'');
-  document.querySelector('.eng-ico').innerHTML=icoSVG(b.cfg,b.cyl);}
-function rebuild(){
-  preset=buildEngine(presetIdx);
-  P.m=preset.m;P.Ie=preset.Ie;P.fd=preset.fd;
-  scG.visible=preset.sc;
-  Object.assign(A,{sc:preset.sc,turbo:preset.turbo,cyl:preset.cyl,evr:preset.evr,bk:preset.bk,amp:preset.amp,sb:preset.sb,lenMul:preset.lenMul,eg:preset.eg,iloud:preset.iloud,lope:preset.lope});
-  headerUpdate();}
-function thrMap(x){const r=tn(presetIdx).e.resp;
-  return r===0?Math.pow(x,1.45):r===2?1-Math.pow(1-x,1.4):r===3?1-Math.pow(1-x,2):x;}
-function turboStep(dt){
-  if(!preset.turbo){S.spool=0;S.pf=1;return;}
-  const rpm=S.w*RPM,tg=S.run?clamp((rpm-preset.spoolRpm)/1500,0,1)*clamp((S.thrE-0.2)/0.5,0,1):0;
-  const tau=tg>S.spool?0.22+0.7*preset.lag:0.4;
-  S.spool+=(tg-S.spool)*(1-Math.exp(-dt/tau));
-  S.pf=1-preset.lag*0.55*(1-S.spool);}
-function wearStep(dt){
-  const rpm=S.w*RPM;S.kn=S.run?preset.knock(rpm):0;
-  if(!G.dmg||!S.run)return;
-  let d=0;
-  if(S.kn>0.45&&S.thrE>0.6)d+=0.012*(S.kn-0.35)/0.65*S.thrE;
-  if(rpm>preset.safe+100)d+=0.5*(rpm-preset.safe)/600;
-  if(d>0){ENG.h=Math.max(0,ENG.h-d*dt);
-    if(ENG.h<=0){S.run=false;S.blown=true;toast('Engine blown. Rebuild it in Tune › ECU');if(tab==='tune')renderSheet();}}}
-/* ---- saving ---- */
-const LSK='v8sim.tune.v1';
-function saveNow(){try{localStorage.setItem(LSK,JSON.stringify({idx:presetIdx,tunes:TUNES,dmg:G.dmg}));}catch(e){}}
-let saveT;function saveSoon(){clearTimeout(saveT);saveT=setTimeout(saveNow,300);}
-function loadTune(){
-  try{const s=JSON.parse(localStorage.getItem(LSK)||'null');
-    if(s&&s.tunes){Object.keys(s.tunes).forEach(k=>{const t=s.tunes[k],d=tn(+k);
-      if(t&&t.p)d.p=t.p;if(t&&t.e)Object.assign(d.e,t.e);
-      if(!Array.isArray(d.e.trim)||d.e.trim.length!==8)d.e.trim=[0,0,0,0,0,0,0,0];
-      if(d.e.resp==null)d.e.resp=1;});
-      G.dmg=!!s.dmg;const i=s.idx|0;return i>=0&&i<PRESETS.length?i:0;}}catch(e){}
-  return 0;}
-/* ---- sheet ---- */
-const limTxt=E=>E.limit+' rpm'+(E.limit>E.safe?' · above safe '+E.safe:'');
-const boostTxt=E=>E.bSet.toFixed(2).replace('.',',')+' bar'+(E.bSet>E.bSafe?' · above safe':'')+' (stock '+E.bDef.toFixed(2).replace('.',',')+')';
-const advTxt=v=>(v>0?'+':'')+v+'°',fuelTxt=v=>v===0?'Standard':(v>0?'+':'')+v+'% '+(v>0?'richer':'leaner');
-function dynoRefresh(){const d=el('dyno');if(d)d.innerHTML=dynoHTML(presetIdx,preset);}
-function ecuHTML(){
-  const E=preset,T=tn(presetIdx).e,hi=Math.ceil((E.safe+1500)/100)*100;
-  let h=`<div class="row"><div>Rev limit<small id="tv_limit">${limTxt(E)}</small></div><input type="range" min="4000" max="${hi}" step="100" value="${E.limit}" data-act="e_limit"></div>
-   <div class="row"><div>Idle speed<small id="tv_idle">${E.idle} rpm</small></div><input type="range" min="600" max="1600" step="50" value="${E.idle}" data-act="e_idle"></div>`;
-  if(E.boosted)h+=`<div class="row"><div>Boost<small id="tv_boost">${boostTxt(E)}</small></div><input type="range" min="0" max="${E.bMax.toFixed(2)}" step="0.05" value="${E.bSet}" data-act="e_boost"></div>`;
-  h+=`<div class="row"><div>Ignition timing<small id="tv_adv">${advTxt(T.adv)}</small></div><input type="range" min="-6" max="6" step="0.5" value="${T.adv}" data-act="e_adv"></div>
-   <div class="row"><div>Fuel mixture<small id="tv_fuel">${fuelTxt(T.fuel)}</small></div><input type="range" min="-8" max="12" step="1" value="${T.fuel}" data-act="e_fuel"></div>
-   <div class="row"><div>Throttle map<small>How the pedal opens the throttle</small></div><div class="chips">${RESP.map((n,j)=>chip('resp',n,T.resp===j,j)).join('')}</div></div>
-   <div class="prow"><div class="ph"><b>Torque map</b></div><small>Drag a column up or down to add or remove torque at that rpm. More torque than the engine can support makes it knock.</small>
-   <div class="mrow">${T.trim.map((v,j)=>`<div class="mcell"><div class="mcol" data-j="${j}"><div class="mz"></div><div class="mf${v<0?' neg':v>8?' hot':''}" style="${v>=0?'bottom':'top'}:50%;height:${Math.abs(v)/20*50}%"></div></div><span class="mv" id="mv${j}">${v>0?'+':''}${v}</span><span>${(Math.round(PRESETS[presetIdx].limit*TRIM_X[j]/100)/10).toFixed(1)}k</span></div>`).join('')}</div>
-   <div class="chips" style="margin-top:8px">${MAPN.map((n,j)=>chip('maptpl',n,false,j)).join('')}</div></div>
-   <div class="row"><div>Engine damage<small>Knock and over-revving wear the engine out</small></div>${chip('dmg',G.dmg?'On':'Off',G.dmg)}</div>`;
-  if(G.dmg)h+=`<div class="row"><div>Engine health<div class="hbar"><i id="hbi" style="width:${Math.round(ENG.h*100)}%"></i></div></div>${ENG.h<1?chip('rebuildeng','Rebuild',false):''}</div>`;
-  h+=`<div class="row"><div>Reset ECU<small>Factory limits, map and timing</small></div>${chip('resetecu','Reset',false)}</div>`;
-  return h;}
-function renderTune(){
-  const i=presetIdx,b=PRESETS[i],E=preset,T=tn(i);
-  let h=`<h3>Tune · ${b.name}</h3><div class="dynobox" id="dyno">${dynoHTML(i,E)}</div>
-   <div class="chips" style="margin:10px 0 2px">${chip('tsub','Parts',tsub==='parts','parts')}${chip('tsub','ECU remap',tsub==='ecu','ecu')}</div>`;
-  if(tsub==='ecu')return h+ecuHTML();
-  PART_KEYS.forEach(k=>{
-    if(k==='ic'&&!E.boosted)return;
-    const list=partList(b,k),cur=clamp(T.p[k]|0,0,list.length-1);
-    const title=k==='fi'?(b.fi==='none'?'Forced induction':b.fi==='sc'?'Supercharger':'Turbos'):PARTS[k].t;
-    h+=`<div class="prow"><div class="ph"><b>${title}</b></div><div class="chips">${list.map((o,j)=>chip('part',o.n,cur===j,k+':'+j)).join('')}</div><small>${list[cur].d||''}</small></div>`;});
-  h+=`<div class="row"><div>Reset parts<small>Everything back to factory</small></div>${chip('resetparts','Reset',false)}</div>`;
-  return h;}
-function tuneClick(a,v){
-  const i=presetIdx,T=tn(i);
-  if(a==='tsub'){tsub=v;return true;}
-  if(a==='part'){const kj=v.split(':'),k=kj[0];T.p[k]=+kj[1];if(k==='fi')T.e.boost=null;rebuild();
-    if(k==='ex'){G.exh=partOpt(i,'ex').voice||0;audioTone();}saveSoon();return true;}
-  if(a==='resp'){T.e.resp=+v;headerUpdate();saveSoon();return true;}
-  if(a==='maptpl'){T.e.trim=MAPT[+v].slice();rebuild();saveSoon();return true;}
-  if(a==='dmg'){G.dmg=!G.dmg;saveSoon();return true;}
-  if(a==='rebuildeng'){ENG.h=1;S.blown=false;toast('Engine rebuilt');return true;}
-  if(a==='resetecu'){const keep=T.p;TUNES[i]=freshTune();TUNES[i].p=keep;rebuild();saveSoon();return true;}
-  if(a==='resetparts'){T.p={};T.e.boost=null;rebuild();saveSoon();return true;}
-  return false;}
-function ecuInput(a,v){
-  const T=tn(presetIdx).e,E0=preset;
-  if(a==='e_limit')T.limit=v===PRESETS[presetIdx].limit?null:v;
-  else if(a==='e_idle')T.idle=v===E0.idleDef?null:v;
-  else if(a==='e_boost')T.boost=Math.abs(v-E0.bDef)<0.001?null:v;
-  else if(a==='e_adv')T.adv=v;else if(a==='e_fuel')T.fuel=v;
-  rebuild();
-  const E=preset,set=(id,t)=>{const n=el(id);if(n)n.textContent=t;};
-  set('tv_limit',limTxt(E));set('tv_idle',E.idle+' rpm');if(E.boosted)set('tv_boost',boostTxt(E));
-  set('tv_adv',advTxt(T.adv));set('tv_fuel',fuelTxt(T.fuel));
-  dynoRefresh();saveSoon();}
-/* torque map: drag the columns */
-{let drag=null;
- const setCol=(c,e)=>{const r=c.getBoundingClientRect(),v=clamp(Math.round((0.5-(e.clientY-r.top)/r.height)*40),-20,20),j=+c.dataset.j,T=tn(presetIdx).e;
-   if(T.trim[j]===v)return;T.trim[j]=v;
-   const f=c.querySelector('.mf');f.style.cssText=(v>=0?'bottom':'top')+':50%;height:'+Math.abs(v)/20*50+'%';f.className='mf'+(v<0?' neg':v>8?' hot':'');
-   el('mv'+j).textContent=(v>0?'+':'')+v;rebuild();dynoRefresh();saveSoon();};
- sheet.addEventListener('pointerdown',e=>{const c=e.target.closest('.mcol');if(!c)return;drag=c;c.setPointerCapture(e.pointerId);setCol(c,e);});
- sheet.addEventListener('pointermove',e=>{if(drag)setCol(drag,e);});
- const end=()=>{drag=null;};sheet.addEventListener('pointerup',end);sheet.addEventListener('pointercancel',end);}
+sheet.addEventListener('input',e=>{const a=e.target.dataset.act;if(a==='vol'){G.vol=e.target.value/100;applyVol();}else if(a==='op'){G.op=e.target.value/100;applyGlass();}else if(a==='limrpm'){preset.limit=+e.target.value;TUNE.st.limit=preset.limit;markDirty();if(preset.limit>safeLimit())toast('Above the safe rpm for these internals');const lv=el('limv');if(lv)lv.textContent=preset.limit;}});
 
 /* ================= AUDIO ================= */
-const A={bangQ:0,bangK:1,lift:false,w:0,run:false,thr:0,thrRaw:0,boost:0,cut:false,cutFrac:0,starting:false,sc:true,gear:0,wIn:0,v:0,popLvl:0,cyl:8,evr:4,bk:[1,0,1,0,0,1,0,1],amp:[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78],sb:[1,1,1,1],lenMul:1,eg:1,iloud:1,lope:0,turbo:false,spool:0,bovQ:0};
+const A={bangQ:0,bangK:1,lift:false,w:0,run:false,thr:0,thrRaw:0,boost:0,cut:false,cutFrac:0,starting:false,sc:true,gear:0,wIn:0,v:0,popLvl:0,turbo:false,rn:6500,lope:1,bovT:0};
 let AC=null,gainNode=null,nodes=null,audioPrevThr=0;
 /* exhaust voicings: fb/kd = pipe resonance + damping, lp = brightness, boom = muffler hump (dB),
    rasp = distortion, crack = combustion snap, popMul = overrun / limiter pops, body = weights of the 4 "thump" resonances */
@@ -1061,57 +814,60 @@ function audioInit(){
     for(let n=0;n<N;n++){const x=n===0?1:0,y=(x-x2)+c1*y1+c2*y2;x2=x1;x1=x;y2=y1;y1=y;if(Math.abs(y)>mx)mx=Math.abs(y);}
     return{c1,c2,g:1/mx};}
   /* "thump" of one combustion pulse inside the pipe: 4 body modes */
-  const RES=[[58,0.045,1],[112,0.03,0.85],[196,0.02,0.6],[360,0.012,0.4]].map(r=>Object.assign(mkRes(r[0],r[1]),{a:r[2]}));
+  let RES=[];
+  function buildRes(sc){RES=[[58,0.045,1],[112,0.03,0.85],[196,0.02,0.6],[360,0.012,0.4]].map(r=>Object.assign(mkRes(r[0]*sc,r[1]/Math.sqrt(sc)),{a:r[2]}));}
+  buildRes(1);
   const MSK=4095;
   const dl=[new Float32Array(4096),new Float32Array(4096)];            /* exhaust pipe delay lines (one per bank) */
   const wp=[0,0],fl=[0,0],xa=[0,0],xb=[0,0],imp=[0,0],ck=[0,0],lz=[0,0];
   const ry1=[new Float64Array(4),new Float64Array(4)],ry2=[new Float64Array(4),new Float64Array(4)];
   /* cross-plane V8: firing order 1-8-7-2-6-5-4-3 -> bank sequence A B A B B A B A (uneven pulses per pipe = the V8 burble) */
-  let cp=0,pos=0,ie=0,tk=0,inl=0,lzA=0,wl=0,scp=0,stp=0,gp=0,tp=0,bov=0,prevCut=false;
+  let BK=[1,0,1,0,0,1,0,1],AMP=[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78],CN=8;
+  let cp=0,pos=0,ie=0,tk=0,inl=0,lzA=0,wl=0,scp=0,stp=0,gp=0,prevCut=false,tpp=0,bovS=0;
+  function setVoice(v){CN=v.cyl;BK=v.bk;AMP=v.amp;buildRes(v.res||1);pos=pos%CN;}
   let spitCk=0.3,cutS=0,run=false,starting=false,cutNow=false,cutF=0,thr=0,rpmN=0,evG=1,dfco=false,popP=0,spit=0,P=EXH[1],rpmB=0;
   function pulse(b,a,c){imp[b]+=a;ck[b]+=c;}
-  function pulseB(b,a,c){if(b===2){pulse(0,a*0.72,c*0.72);pulse(1,a*0.72,c*0.72);}else pulse(b,a,c);}
   function onEvent(p){
-    const b=A.bk[p];
+    const b=BK[p];
     tk+=(0.25+0.75*rpmN)*(0.6+0.8*Math.random());ie+=1;                 /* valve tick + intake pulse */
-    if(starting){pulseB(b,0.3*(0.6+0.8*Math.random()),0.04);return;}     /* cranking chug (compression only) */
+    if(starting){pulse(b,0.3*(0.6+0.8*Math.random()),0.04);return;}     /* cranking chug (compression only) */
     if(!run)return;
     const r=Math.random();
-    const burn=evG*A.amp[p]*A.eg*(0.35+0.65*Math.pow(thr,0.8))*(0.9+0.2*Math.random());
+    const burn=evG*AMP[p]*(0.35+0.65*Math.pow(thr,0.8))*(0.9+0.2*Math.random());
     if(cutNow){                                                         /* limiter hard cut: no combustion, now and then unburnt fuel spits */
-      if(r<spit)pulseB(b,evG*(1.2+1.3*Math.random()),P.crack*(2+2*Math.random())*spitCk);
+      if(r<spit)pulse(b,evG*(1.2+1.3*Math.random()),P.crack*(2+2*Math.random())*spitCk);
       prevCut=true;return;}
-    if(prevCut){prevCut=false;pulseB(b,burn*1.1,P.crack*(G.lim===2?1.3:0.45));return;}    /* first cylinders after the cut fire with a surge */
-    if(cutF>0.01&&r<cutF){pulseB(b,burn*0.15,0);return;}                 /* soft cut: dropped cylinder = weak puff */
+    if(prevCut){prevCut=false;pulse(b,burn*1.1,P.crack*(G.lim===2?1.3:0.45));return;}    /* first cylinders after the cut fire with a surge */
+    if(cutF>0.01&&r<cutF){pulse(b,burn*0.15,0);return;}                 /* soft cut: dropped cylinder = weak puff */
     if(dfco){                                                           /* overrun: fuel cut, air pumping + crackle */
-      if(r<popP)pulseB(b,evG*(1.0+1.6*Math.random()),P.crack*(2.2+2*Math.random()));
-      else pulseB(b,evG*0.05,0);
+      if(r<popP)pulse(b,evG*(1.0+1.6*Math.random()),P.crack*(2.2+2*Math.random()));
+      else pulse(b,evG*0.05,0);
       return;}
-    const lope=Math.max(0.2,1+(1-Math.min(1,rpmB/1600))*0.5*(1+A.lope*1.6)*(Math.random()-0.5));     /* uneven idle lope */
-    pulseB(b,burn*lope,P.crack*(0.1+0.9*Math.pow(thr,1.5))*(0.5+0.5*rpmN));
+    const lope=1+(1-Math.min(1,rpmB/1600))*0.5*(A.lope||1)*(Math.random()-0.5);     /* uneven idle lope */
+    pulse(b,burn*lope,P.crack*(0.1+0.9*Math.pow(thr,1.5))*(0.5+0.5*rpmN));
   }
   sp.onaudioprocess=ev=>{
     const o0=ev.outputBuffer.getChannelData(0),o1=ev.outputBuffer.getChannelData(1),o2=ev.outputBuffer.getChannelData(2),n=o0.length;
-    const w=A.w,f=w/TAU;rpmB=w*RPM;
+    const w=A.w,f=w/TAU;rpmB=w*RPM;const evP=CN*0.5;
     run=A.run;starting=A.starting;thr=A.thr;cutNow=A.cut;cutF=A.cutFrac;
-    P=EXH[G.exh]||EXH[1];rpmN=Math.min(1,rpmB/6500);
+    P=EXH[G.exh]||EXH[1];rpmN=Math.min(1,rpmB/(A.rn||6500));
     if(A.bangQ>0){const q=Math.min(A.bangQ,3),kk=A.bangK||1;A.bangQ=0;           /* backfire: big low thump + sharp crack in both pipes */
       for(let k=0;k<q;k++){pulse(0,(3.2+2.2*Math.random())*kk,P.crack*5*kk);pulse(1,(3.2+2.2*Math.random())*kk,P.crack*5*kk);}}
-    const evR=Math.max(f*A.evr,1);
+    const evR=Math.max(f*evP,1);
     evG=1/Math.sqrt(1+evR/130);
     dfco=run&&thr<0.03&&rpmB>1300&&!cutNow;
     popP=G.pops?A.popLvl*0.06*P.popMul*(0.3+0.7*rpmN):0;
     spit=(G.lim===2?0.45:0.03)*(0.4+0.6*P.popMul);spitCk=G.lim===2?1:0.3;
-    const D0=Math.round(sr*P.len[0]*A.lenMul),D1=Math.round(sr*P.len[1]*A.lenMul),fb=P.fb,kd=P.kd,bw=P.body.map((x,k)=>x*A.sb[k]);
+    const D0=Math.round(sr*P.len[0]),D1=Math.round(sr*P.len[1]),fb=P.fb,kd=P.kd,bw=P.body;
     const ckDec=Math.exp(-dts/0.0012),ieDec=Math.exp(-dts/Math.max(0.002,0.45/evR)),tkDec=Math.exp(-dts/0.0007);
-    const ai=0.03+0.05*rpmN,iAmp=run?1.7*A.iloud*Math.pow(thr,1.6)*(0.2+0.8*rpmN):0,cutK=1-Math.exp(-dts/0.006),windA=1.2*Math.min(1,A.v/55);
-    if(A.bovQ){A.bovQ=0;bov=1;}
-    const tbOn=run&&A.turbo&&G.whine,tbA=0.011*A.spool*(0.25+0.75*thr),tbF=1500+5500*A.spool,bvDec=Math.exp(-dts/0.28);
+    const ai=0.03+0.05*rpmN,iAmp=run?1.7*Math.pow(thr,1.6)*(0.2+0.8*rpmN):0,cutK=1-Math.exp(-dts/0.006),windA=1.2*Math.min(1,A.v/55);
     const scOn=run&&A.sc&&G.whine,scA=(0.016+0.03*thr+0.07*A.boost)*Math.min(1,f/8);
+    const twA=(run&&A.turbo)?0.011*Math.min(1.3,A.boost)*(0.3+0.7*thr)*Math.min(1,f/25):0,twF=1500+f*45+A.boost*1200;
+    if(A.bovT>0){bovS=A.bovT;A.bovT=0;}const bovDec=Math.exp(-dts/0.12);
     const gwA=(A.gear>0&&A.wIn>20)?0.008*Math.min(1,A.wIn/150)*(0.35+0.65*thr):0,gwF=A.wIn/TAU*29,stF=140+f*28;
     for(let i=0;i<n;i++){
-      cp+=f*A.evr*dts;
-      while(cp>=1){cp-=1;pos=(pos+1)%A.cyl;onEvent(pos);}
+      cp+=f*evP*dts;
+      while(cp>=1){cp-=1;pos=pos+1>=CN?0:pos+1;onEvent(pos);}
       let e0=0,e1=0;
       for(let b=0;b<2;b++){
         const xin=imp[b];imp[b]=0;const xd=xin-xb[b];xb[b]=xa[b];xa[b]=xin;
@@ -1127,8 +883,8 @@ function audioInit(){
       inl+=(nz-inl)*ai;ie*=ieDec;tk*=tkDec;lzA+=(nz-lzA)*0.4;const hpn=nz-lzA;wl+=(nz-wl)*0.02;
       cutS+=((cutNow?1:0)-cutS)*cutK;let au=inl*iAmp*(0.45+0.55*Math.min(1,ie))*(1-0.6*cutS)+hpn*tk*0.12+wl*windA*0.1;                          /* intake roar + valvetrain + wind */
       if(scOn){scp+=TAU*f*12.6*dts;if(scp>TAU)scp-=TAU;au+=scA*(Math.sin(scp)+0.35*Math.sin(2*scp)+0.12*Math.sin(3*scp))+hpn*scA*0.05;}
-      if(tbOn&&tbA>0.0002){tp+=TAU*tbF*dts;if(tp>TAU)tp-=TAU;au+=tbA*(Math.sin(tp)+0.25*Math.sin(2*tp));}
-      bov*=bvDec;if(bov>0.002&&G.whine)au+=hpn*bov*0.35;
+      if(twA>0){tpp+=TAU*twF*dts;if(tpp>TAU)tpp-=TAU;au+=twA*(Math.sin(tpp)+0.3*Math.sin(2*tpp));}
+      if(bovS>0.001){bovS*=bovDec;au+=hpn*bovS*0.4;}
       if(gwA>0){gp+=TAU*gwF*dts;if(gp>TAU)gp-=TAU;au+=gwA*(Math.sin(gp)+0.4*Math.sin(2*gp));}       /* gearbox whine */
       if(starting){stp+=TAU*stF*dts;if(stp>TAU)stp-=TAU;au+=0.05*(Math.sin(stp)+0.4*Math.sin(2*stp+0.6));}
       o0[i]=e0;o1[i]=e1;o2[i]=au;
@@ -1136,18 +892,232 @@ function audioInit(){
     if(!isFinite(ry1[0][0]+ry1[1][0]+fl[0]+fl[1]+inl)){                                          /* safety reset */
       dl[0].fill(0);dl[1].fill(0);fl[0]=fl[1]=inl=0;ry1[0].fill(0);ry1[1].fill(0);ry2[0].fill(0);ry2[1].fill(0);imp[0]=imp[1]=ck[0]=ck[1]=0;}
   };
+  nodes.setVoice=setVoice;applyVoice();
 }
 function audioUpdate(dt){
   if(!AC||!nodes)return;
-  const P=EXH[G.exh]||EXH[1],rpm=A.w*RPM,rpmN=Math.min(1,rpm/6500),t=AC.currentTime;
+  const P=EXH[G.exh]||EXH[1],rpm=A.w*RPM,rpmN=Math.min(1,rpm/(A.rn||6500)),t=AC.currentTime;
   const fc=Math.min(AC.sampleRate*0.45,P.lp*(0.25+0.45*A.thr+0.3*rpmN));
   nodes.lp.forEach(nd=>nd.frequency.setTargetAtTime(fc,t,0.05));
-  if(A.lift){A.lift=false;if(rpm>2800)A.popLvl=1;}     /* lift-off at high rpm -> crackle */
+  if(A.lift){A.lift=false;if(rpm>2800)A.popLvl=1;if(A.turbo&&A.boost>0.25)A.bovT=Math.min(1.2,A.boost+0.2);}     /* lift-off at high rpm -> crackle */
   audioPrevThr=A.thrRaw;
   A.popLvl*=Math.exp(-dt/1.6);
   if(!A.run)A.popLvl=0;
 }
 document.addEventListener('visibilitychange',()=>{if(AC){document.hidden?AC.suspend():AC.resume();}});
+
+/* ================= TUNING: parts, ECU remap, dyno ================= */
+const MAPBP=[0.15,0.35,0.55,0.75,0.9,1.0];
+const MAPDEF={
+ ign:{n:'Ignition',u:'°',min:-8,max:8,step:0.5,col:'#38b8ff',hint:'Timing advance adds power up to a point, then it knocks.'},
+ fuel:{n:'Fuel',u:'%',min:-10,max:10,step:0.5,col:'#f5b400',hint:'Richer is cooler and safer. Leaner makes heat and knock.'},
+ boost:{n:'Boost',u:'%',min:-30,max:30,step:1,col:'#31e07a',hint:'Scales the boost pressure target. Needs forced induction.'}};
+const PARTS=[
+ {k:'intake',n:'Air intake',d:['Stock airbox','Sport panel filter','Cold-air intake','Open carbon ram-air intake']},
+ {k:'exhaust',n:'Exhaust system',d:['Stock catalytic system · quiet','Sport cat-back · louder','Headers + straight pipe · loud','Race titanium · loudest']},
+ {k:'cam',n:'Camshafts',d:['Stock cams','Street cam · a little lope','Sport cam · more top-end, weaker low-end','Race cam · big top-end, rough idle']},
+ {k:'boost',n:'Boost',d:['Stock','+0,2 bar','+0,4 bar','+0,6 bar']},
+ {k:'inj',n:'Injectors and fuel pump',d:['Stock · small reserve','+20% fuel flow','+40% fuel flow','+60% fuel flow']},
+ {k:'cool',n:'Radiator and intercooler',d:['Stock cooling','Larger radiator','Radiator + intercooler','Race cooling package']},
+ {k:'int',n:'Forged internals',d:['Stock pistons and rods','Forged pistons','Forged pistons + rods','Full race bottom end']},
+ {k:'fly',n:'Flywheel',d:['Stock','Light · quicker revs','Lighter · quicker still','Race flywheel · very quick revs']}];
+const TUNE={st:null,mul:new Float32Array(2),knk:new Float32Array(2),step:50,dyn:1,temp:30,kn:0,warn:[],ready:false};
+let TUNEDB={sel:0,eng:{}},tuneDirty=false,tsub='parts',mapKind='ign';
+function newTune(){const z=()=>[0,0,0,0,0,0];return{parts:{intake:0,exhaust:0,cam:0,boost:0,inj:0,cool:0,int:0,fly:0},maps:{ign:z(),fuel:z(),boost:z()},limit:0,health:100};}
+TUNE.st=newTune();
+function normTune(raw){const t=newTune();if(!raw||typeof raw!=='object')return t;
+  try{Object.keys(t.parts).forEach(k=>{const v=raw.parts?+raw.parts[k]:-1;if(v>=0&&v<=3)t.parts[k]=v|0;});
+    ['ign','fuel','boost'].forEach(k=>{const a=raw.maps&&raw.maps[k];if(Array.isArray(a)&&a.length===6)t.maps[k]=a.map(x=>clamp(+x||0,MAPDEF[k].min,MAPDEF[k].max));});
+    if(raw.limit>0)t.limit=+raw.limit;if(raw.health>=0&&raw.health<=100)t.health=+raw.health;}catch(e){}
+  return t;}
+function loadTuneDB(){try{const r=JSON.parse(localStorage.getItem('v8sim.tune')||'null');if(r&&typeof r==='object'&&r.eng)TUNEDB={sel:+r.sel||0,eng:r.eng};}catch(e){}
+  if(!(TUNEDB.sel>=0&&TUNEDB.sel<PRESETS.length))TUNEDB.sel=0;}
+function saveTune(){if(TUNE.ready)TUNEDB.eng[preset.name]=TUNE.st;try{localStorage.setItem('v8sim.tune',JSON.stringify(TUNEDB));}catch(e){}tuneDirty=false;}
+function markDirty(){tuneDirty=true;}
+setInterval(()=>{if(tuneDirty)saveTune();},3000);addEventListener('pagehide',saveTune);
+
+/* ---- model ---- */
+const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+function spool(rpm,kind){return kind==='turbo'?smooth(1100,3000,rpm):(0.35+0.65*Math.min(1,rpm/4500));}
+function mapAt(st,kind,rpm){const a=st.maps[kind],x=clamp(rpm/preset.limit0,0,2);
+  if(x<=MAPBP[0])return a[0];
+  for(let i=1;i<MAPBP.length;i++){if(x<=MAPBP[i]){const t=(x-MAPBP[i-1])/(MAPBP[i]-MAPBP[i-1]);return a[i-1]+(a[i]-a[i-1])*t;}}
+  return a[a.length-1];}
+function boostFull(st,rpm){const base=Math.max(0,preset.boost),add=0.2*st.parts.boost;
+  if(base+add<=0.0001)return 0;
+  return (base+add)*(1+mapAt(st,'boost',rpm)/100)*spool(rpm,preset.kind);}
+function boostBar(rpm){const st=TUNE.st,base=Math.max(0,preset.boost),add=0.2*st.parts.boost;
+  if(base+add<=0.0001)return preset.boost<0?preset.boost:0;
+  return boostFull(st,rpm);}
+function safeLimit(){return preset.limit0*(1.03+0.03*TUNE.st.parts.int);}
+/* torque multiplier + knock index at full throttle for a given rpm */
+function calcAt(st,rpm){
+  const L=st.parts,x=clamp(rpm/preset.limit0,0,1.3);
+  let m=1;
+  m*=1+0.02*L.intake*(0.4+0.6*x);
+  m*=1+0.016*L.exhaust*(0.3+0.7*x);
+  m*=1+0.035*L.cam*(2*x-0.9);
+  const b=boostFull(st,rpm),b0=Math.max(0,preset.boost)*spool(rpm,preset.kind);
+  m*=(1+0.95*b)/(1+0.95*b0);
+  const dg=mapAt(st,'ign',rpm),F=mapAt(st,'fuel',rpm);
+  m*=(1+0.01*dg-0.00125*dg*dg)*(1-0.0035*(Math.abs(F-3)-3));
+  const demand=m*(1+F/100),cap=1.12+0.2*L.inj;let lean=false;
+  if(demand>cap){m*=cap/demand;lean=true;}
+  const bSafe=Math.max(0,preset.boost)+0.12+0.22*L.int+0.12*L.cool;
+  const over=Math.max(0,b-bSafe);
+  const advLim=3-3*Math.max(0,b-b0)+1.5*L.cool+0.5*L.int;
+  let kn=0.25*Math.max(0,dg-advLim)+1.4*over+0.15*Math.max(0,-F)*(1+b);
+  if(lean)kn+=3*(demand/cap-1)+0.15;
+  return{m:m,kn:kn,lean:lean,over:over>0.02};}
+function tableAt(tab,rpm){const x=Math.max(0,rpm)/TUNE.step,i=x|0;if(i>=tab.length-1)return tab[tab.length-1];const f=x-i;return tab[i]+(tab[i+1]-tab[i])*f;}
+function tuneMul(rpm){return tableAt(TUNE.mul,rpm);}
+function tqT(rpm){return tq(rpm)*tuneMul(rpm)*TUNE.dyn;}
+function rebuildTune(){
+  const st=TUNE.st,lim=preset.limit0,n=Math.ceil(lim*1.4/TUNE.step)+2;
+  const mul=new Float32Array(n),knk=new Float32Array(n);
+  let maxK=0,lean=false,over=false,mPeak=1;
+  for(let i=0;i<n;i++){const r=i*TUNE.step,c=calcAt(st,r);mul[i]=c.m;knk[i]=c.kn;
+    if(r>=1500&&r<=lim*1.02){if(c.kn>maxK)maxK=c.kn;if(c.lean)lean=true;if(c.over)over=true;if(c.m>mPeak)mPeak=c.m;}}
+  TUNE.mul=mul;TUNE.knk=knk;TUNE.maxK=maxK;
+  const L=st.parts,w=[],eq=82+18*(0.1+0.9*mPeak)/(1+0.18*L.cool);
+  if(maxK>0.7)w.push({t:'Engine damage risk',c:'bad'});
+  else if(maxK>0.35)w.push({t:'Knock: ECU pulls timing, power is lost',c:'mid'});
+  if(over)w.push({t:'Boost above the safe level',c:maxK>0.7?'bad':'mid'});
+  if(lean)w.push({t:'Fuel system is the limit: add injectors',c:'mid'});
+  if(eq>118)w.push({t:'Will overheat under load',c:'bad'});else if(eq>108)w.push({t:'Runs hot under load',c:'mid'});
+  if(preset.limit>safeLimit())w.push({t:'Rev limit above the safe rpm',c:'mid'});
+  if(!w.length)w.push({t:'Setup is safe',c:'ok'});
+  TUNE.warn=w;}
+function tuneEffects(){const L=TUNE.st.parts;
+  if(!P.fd0)P.fd0=P.fd;P.fd=P.fd0*(preset.gearK||1);
+  P.Ie=(preset.Ie||0.55)*[1,0.86,0.74,0.64][L.fly];P.m=preset.mass||1700;
+  const hasSC=!!(preset.sc||(preset.kind==='na'&&L.boost>0));scG.visible=hasSC;A.sc=hasSC;
+  A.turbo=preset.kind==='turbo';A.lope=(preset.lope||1)*(1+0.6*L.cam);A.rn=preset.rn||6500;}
+function tuneStep(dt){
+  const st=TUNE.st,L=st.parts,rpm=S.w*RPM,thr=S.run?S.thrE:0;
+  const m=tuneMul(rpm),load=thr*clamp(rpm/preset.limit0,0,1.2);
+  const eq=S.run?82+18*load*(0.1+0.9*m)/(1+0.18*L.cool):28;
+  TUNE.temp+=(eq-TUNE.temp)*(1-Math.exp(-dt/(S.run?12:90)));
+  const kb=tableAt(TUNE.knk,rpm)*Math.pow(thr,1.5)+Math.max(0,TUNE.temp-105)/25*thr;
+  TUNE.kn+=(kb-TUNE.kn)*(1-Math.exp(-dt/0.25));
+  const kn=TUNE.kn,h0=st.health;
+  if(S.run){
+    if(kn>0.7)st.health-=dt*(kn-0.7)*6;
+    if(TUNE.temp>120)st.health-=dt*(TUNE.temp-120)*0.12;
+    const sl=safeLimit();if(rpm>sl)st.health-=dt*(rpm-sl)/100*0.5;
+    st.health=Math.max(0,st.health);if(st.health<h0)tuneDirty=true;
+    if(st.health<=0){S.run=false;S.starting=false;fireBackfire(1);toast('Engine blown! Repair it in Tune');}}
+  const dynK=1-0.3*clamp((kn-0.35)/0.65,0,1),dynT=TUNE.temp>112?Math.max(0.6,1-0.012*(TUNE.temp-112)):1,dynH=st.health<100?0.55+0.45*st.health/100:1;
+  TUNE.dyn=dynK*dynT*dynH;}
+let t4=null;
+function tuneHud(){if(!t4)t4=el('tuneHud');
+  const st=TUNE.st,kn=TUNE.kn>0.35,hot=TUNE.temp>108;
+  let t=Math.round(TUNE.temp)+'°C · Engine '+Math.round(st.health)+'%';if(kn)t+=' · KNOCK';if(hot)t+=' · HOT';
+  setT('t4',t4,t);const c=(kn||hot||st.health<50)?'var(--red)':'';if(hudLast.t4c!==c){hudLast.t4c=c;t4.style.color=c;}}
+
+/* ---- sound voice per engine ---- */
+const V8BK=[1,0,1,0,0,1,0,1],V8AMP=[1,0.86,0.97,0.8,1.06,0.84,0.92,0.78];
+function voiceOf(p){const n=p.cyl||8;
+  return{cyl:n,bk:p.bk||(p.cyl?Array.from({length:n},(_,i)=>i&1):V8BK),
+    amp:p.amp||(p.cyl?Array.from({length:n},(_,i)=>0.93+0.07*Math.sin(i*2.3+1)):V8AMP),res:p.res||1};}
+function applyVoice(){if(nodes&&nodes.setVoice)nodes.setVoice(voiceOf(preset));}
+
+/* ---- actions ---- */
+function setPart(k,l){TUNE.st.parts[k]=l;
+  if(k==='exhaust'){G.exh=[0,1,2,2][l];audioTone();}
+  tuneEffects();rebuildTune();markDirty();}
+function tuneAct(a,v){
+  if(a==='tsub'){tsub=v;return true;}
+  if(a==='part'){const q=v.split(':');setPart(q[0],+q[1]);return true;}
+  if(a==='mapsel'){mapKind=v;return true;}
+  if(a==='mapreset'){TUNE.st.maps[mapKind]=[0,0,0,0,0,0];rebuildTune();markDirty();return true;}
+  if(a==='repair'){TUNE.st.health=100;TUNE.temp=Math.min(TUNE.temp,90);markDirty();toast('Engine repaired');return true;}
+  if(a==='tstock'){const h=TUNE.st.health;TUNE.st=newTune();TUNE.st.health=h;TUNE.st.limit=preset.limit0;preset.limit=preset.limit0;
+    G.exh=0;audioTone();tuneEffects();rebuildTune();markDirty();toast('Back to the stock tune');return true;}
+  return false;}
+
+/* ---- sheet ---- */
+function tuneSheet(){
+  const st=TUNE.st,L=st.parts;
+  let h='<h3>Tune</h3><div class="chips">'+[['parts','Parts'],['ecu','ECU map'],['dyno','Dyno']].map(x=>chip('tsub',x[1],tsub===x[0],x[0])).join('')+'</div><div class="tsum" id="tsum"></div>';
+  if(tsub==='parts'){
+    PARTS.forEach(p=>{const nm=p.k==='boost'?(preset.kind==='na'?'Supercharger kit':'Turbo / boost upgrade'):p.n;
+      h+='<div class="prow"><div>'+nm+'<small>'+p.d[L[p.k]]+'</small></div><div class="chips">'+
+        [0,1,2,3].map(l=>chip('part',l?'Stage '+l:'Stock',L[p.k]===l,p.k+':'+l)).join('')+'</div></div>';});
+    h+='<div class="row"><div>Engine health<small>'+Math.round(st.health)+'% · safe rpm '+Math.round(safeLimit())+'</small></div>'+chip('repair','Repair',false)+'</div>'+
+       '<div class="row"><div>Back to stock<small>Removes all parts and map changes</small></div>'+chip('tstock','Reset tune',false)+'</div>';
+  }else if(tsub==='ecu'){
+    const d=MAPDEF[mapKind];
+    h+='<div class="chips" style="margin-top:6px">'+Object.keys(MAPDEF).map(k=>chip('mapsel',MAPDEF[k].n,mapKind===k,k)).join('')+chip('mapreset','Reset map',false)+'</div>'+
+       '<canvas id="mapcv" class="mapcv"></canvas><div class="note">'+d.hint+' Drag the dots up or down. The amber line is the live rpm.</div>';
+    if(mapKind==='boost'&&preset.kind==='na'&&L.boost===0)h+='<div class="note">This engine has no forced induction. Add a supercharger kit in Parts first.</div>';
+  }else{
+    h+='<canvas id="dynocv" class="mapcv"></canvas><div class="note">Solid = your tune, dashed = stock. Red dots mark knock. The dashed red line is your rev limit.</div>'+
+       '<div class="row"><div>Engine health<small>'+Math.round(st.health)+'%</small></div>'+chip('repair','Repair',false)+'</div>';
+  }
+  return h;}
+function dynoData(){const lim=Math.round(preset.limit0*1.15/100)*100,o={r:[],ts:[],ps:[],tt:[],pt:[],kn:[],pS:0,tS:0,pT:0,tT:0};
+  for(let r=500;r<=lim;r+=100){const ts=tq(r),k=tableAt(TUNE.knk,r),tt=ts*tuneMul(r)*(1-0.3*clamp((k-0.35)/0.65,0,1));
+    const ps=ts*r/RPM/745.7,pt=tt*r/RPM/745.7;
+    o.r.push(r);o.ts.push(ts);o.tt.push(tt);o.ps.push(ps);o.pt.push(pt);o.kn.push(k);
+    if(r<=preset.limit){if(ps>o.pS)o.pS=ps;if(pt>o.pT)o.pT=pt;if(ts>o.tS)o.tS=ts;if(tt>o.tT)o.tT=tt;}}
+  return o;}
+function updateTsum(){const e=document.getElementById('tsum');if(!e)return;const d=dynoData(),pc=d.pS>0?Math.round((d.pT/d.pS-1)*100):0;
+  e.innerHTML='<b>'+Math.round(d.pT)+' hp · '+Math.round(d.tT)+' Nm</b><small>stock '+Math.round(d.pS)+' hp · '+Math.round(d.tS)+' Nm · '+(pc>=0?'+':'')+pc+'%</small><div>'+
+    TUNE.warn.map(w=>'<span class="wtag '+w.c+'">'+w.t+'</span>').join('')+'</div>';}
+function cvSetup(cv,h){const dpr=Math.min(2,window.devicePixelRatio||1),w=Math.max(200,cv.clientWidth||300);
+  cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);cv.style.height=h+'px';return{w:w,h:h,dpr:dpr};}
+function tuneAfterRender(){updateTsum();if(tsub==='ecu')setupMapCanvas();else if(tsub==='dyno')drawDyno();}
+
+/* ---- dyno chart ---- */
+function drawDyno(){const cv=document.getElementById('dynocv');if(!cv)return;
+  const g=cvSetup(cv,210),ctx=cv.getContext('2d'),d=dynoData();ctx.setTransform(g.dpr,0,0,g.dpr,0,0);
+  const w=g.w,h=g.h,pl=10,pr=10,pt=26,pb=26,xmin=500,xmax=d.r[d.r.length-1];
+  const X=r=>pl+(r-xmin)/(xmax-xmin)*(w-pl-pr);
+  const mT=Math.max.apply(null,d.tt.concat(d.ts))*1.1,mP=Math.max.apply(null,d.pt.concat(d.ps))*1.1;
+  const YT=v=>h-pb-v/mT*(h-pt-pb),YP=v=>h-pb-v/mP*(h-pt-pb);
+  const mut='#8a91a3',ln=G.light?'#c4cad7':'#2c303c';
+  ctx.clearRect(0,0,w,h);ctx.font='11px sans-serif';ctx.textAlign='center';ctx.lineWidth=1;
+  for(let r=1000;r<=xmax;r+=1000){ctx.strokeStyle=ln;ctx.beginPath();ctx.moveTo(X(r),pt);ctx.lineTo(X(r),h-pb);ctx.stroke();ctx.fillStyle=mut;ctx.fillText((r/1000)+'k',X(r),h-pb+15);}
+  const line=(arr,Y,col,dash,wd)=>{ctx.setLineDash(dash);ctx.strokeStyle=col;ctx.lineWidth=wd;ctx.beginPath();arr.forEach((v,i)=>{const x=X(d.r[i]),y=Y(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();ctx.setLineDash([]);};
+  line(d.ts,YT,'#38b8ff88',[5,4],2);line(d.ps,YP,'#f5b40088',[5,4],2);
+  line(d.tt,YT,'#38b8ff',[],3);line(d.pt,YP,'#f5b400',[],3);
+  d.kn.forEach((k,i)=>{if(k>0.35){ctx.fillStyle='#ff4b3e';ctx.beginPath();ctx.arc(X(d.r[i]),YT(d.tt[i]),3.5,0,TAU);ctx.fill();}});
+  if(preset.limit>=xmin&&preset.limit<=xmax){ctx.strokeStyle='#ff4b3e';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(preset.limit),pt);ctx.lineTo(X(preset.limit),h-pb);ctx.stroke();ctx.setLineDash([]);}
+  ctx.textAlign='left';ctx.fillStyle='#38b8ff';ctx.fillText('Torque (Nm)',pl+2,14);ctx.fillStyle='#f5b400';ctx.fillText('Power (hp)',pl+90,14);}
+
+/* ---- ECU map editor ---- */
+const MAPUI={cv:null,w:300,h:190,dpr:1,act:-1,pl:36,pr:14,pt:24,pb:30};
+function mapX(i){return MAPUI.pl+i*(MAPUI.w-MAPUI.pl-MAPUI.pr)/5;}
+function mapFromY(y){const d=MAPDEF[mapKind],g=MAPUI;if(g.act<0)return;
+  let v=d.max-(y-g.pt)/(g.h-g.pt-g.pb)*(d.max-d.min);v=clamp(Math.round(v/d.step)*d.step,d.min,d.max);
+  const a=TUNE.st.maps[mapKind];if(a[g.act]!==v){a[g.act]=v;rebuildTune();markDirty();updateTsum();}drawMap();}
+function setupMapCanvas(){const cv=document.getElementById('mapcv');if(!cv)return;
+  const g=cvSetup(cv,190);MAPUI.cv=cv;MAPUI.w=g.w;MAPUI.h=g.h;MAPUI.dpr=g.dpr;MAPUI.act=-1;
+  cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);const r=cv.getBoundingClientRect(),x=e.clientX-r.left;
+    let best=0,bd=1e9;for(let i=0;i<6;i++){const dd=Math.abs(mapX(i)-x);if(dd<bd){bd=dd;best=i;}}MAPUI.act=best;mapFromY(e.clientY-r.top);});
+  cv.addEventListener('pointermove',e=>{if(MAPUI.act<0)return;mapFromY(e.clientY-cv.getBoundingClientRect().top);});
+  const up=()=>{MAPUI.act=-1;drawMap();};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+  drawMap();}
+function drawMap(){const cv=MAPUI.cv;if(!cv||!cv.isConnected)return;
+  const ctx=cv.getContext('2d'),g=MAPUI,w=g.w,h=g.h,d=MAPDEF[mapKind],a=TUNE.st.maps[mapKind];
+  const Y=v=>g.pt+(d.max-v)/(d.max-d.min)*(h-g.pt-g.pb);
+  const txt=G.light?'#10131a':'#f1f3f8',mut='#8a91a3',ln=G.light?'#c4cad7':'#2c303c';
+  ctx.setTransform(g.dpr,0,0,g.dpr,0,0);ctx.clearRect(0,0,w,h);ctx.font='11px sans-serif';ctx.lineWidth=1;
+  [d.min,0,d.max].forEach(v=>{ctx.setLineDash(v===0?[5,4]:[]);ctx.strokeStyle=ln;ctx.beginPath();ctx.moveTo(g.pl,Y(v));ctx.lineTo(w-g.pr,Y(v));ctx.stroke();
+    ctx.fillStyle=mut;ctx.textAlign='right';ctx.fillText((v>0?'+':'')+v+d.u,g.pl-5,Y(v)+4);});
+  ctx.setLineDash([]);
+  for(let i=0;i<6;i++){ctx.strokeStyle=ln;ctx.beginPath();ctx.moveTo(mapX(i),g.pt);ctx.lineTo(mapX(i),h-g.pb);ctx.stroke();
+    ctx.fillStyle=mut;ctx.textAlign='center';ctx.fillText((MAPBP[i]*preset.limit0/1000).toFixed(1)+'k',mapX(i),h-g.pb+15);}
+  ctx.strokeStyle=d.col;ctx.lineWidth=2.5;ctx.beginPath();a.forEach((v,i)=>{i?ctx.lineTo(mapX(i),Y(v)):ctx.moveTo(mapX(i),Y(v));});ctx.stroke();
+  const rpm=S.w*RPM;
+  if(rpm>100){const u=rpm/preset.limit0;let f=0;
+    if(u<=MAPBP[0])f=0;else if(u>=MAPBP[5])f=5;else for(let i=1;i<6;i++){if(u<=MAPBP[i]){f=i-1+(u-MAPBP[i-1])/(MAPBP[i]-MAPBP[i-1]);break;}}
+    const cx=mapX(0)+f*(mapX(1)-mapX(0));ctx.strokeStyle='#ffb02e';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx,g.pt);ctx.lineTo(cx,h-g.pb);ctx.stroke();}
+  a.forEach((v,i)=>{ctx.beginPath();ctx.arc(mapX(i),Y(v),9,0,TAU);ctx.fillStyle=g.act===i?d.col:(G.light?'#ffffff':'#13151c');ctx.fill();
+    ctx.lineWidth=2.5;ctx.strokeStyle=d.col;ctx.stroke();ctx.fillStyle=txt;ctx.textAlign='center';
+    ctx.fillText((v>0?'+':'')+v.toFixed(d.step<1?1:0),mapX(i),Y(v)-14);});}
+function tuneLive(){if(tab==='tune'&&tsub==='ecu'&&sheet.classList.contains('show'))drawMap();}
 
 /* ================= HUD + LOOP ================= */
 const hudEl={rpm:el('rpm'),kmh:el('kmh'),bar:el('bar'),gbox:el('gbox'),pw:el('pw'),gbi:el('gbinfo'),fps:el('stFps'),load:el('stLoad'),flame:el('flame'),bS:el('bStart'),bT:el('bStop'),st:el('start')};
@@ -1169,10 +1139,8 @@ function hud(dt){
   rfill.style.clipPath='inset(0 '+(100-clamp(rpm/RB_MAX*100,0,100)).toFixed(2)+'% 0 0)';
   rbar.classList.toggle('fl',near&&!!ph);
   if(S.cut>0)cutVis=0.15;else cutVis=Math.max(0,cutVis-dt);cutEl.classList.toggle('on',cutVis>0);
-  knkEl.classList.toggle('on',S.run&&S.kn>0.08&&S.thrE>0.4);
-  if(tab==='tune'&&tsub==='ecu'&&G.dmg){const hb=document.getElementById('hbi');if(hb)hb.style.width=(ENG.h*100).toFixed(0)+'%';}
   hudEl.flame.classList.toggle('on',S.run&&((S.thr>0.9&&(S.map>0.4||rpm>5000))||(S.cut>0&&G.lim===2)||(G.pops&&A.popLvl>0.6&&S.thrE<0.05)||BF.any));
-  setT('load',hudEl.load,'Load '+Math.round(S.thrE*100)+'%');
+  setT('load',hudEl.load,'Load '+Math.round(S.thrE*100)+'%');tuneHud();
   const on=S.run;hudEl.st.classList.toggle('run',on);hudEl.bS.classList.toggle('act',!on);hudEl.bT.classList.toggle('act',on);
   fpsN++;fpsT+=dt;if(fpsT>0.6){setT('fps',hudEl.fps,Math.round(fpsN/fpsT)+' fps · '+Math.round(fpsT/fpsN*1000)+' ms');fpsN=0;fpsT=0;}
 }
@@ -1181,24 +1149,26 @@ function frame(now){
   requestAnimationFrame(frame);
   let dt=(now-last)/1000;last=now;if(!(dt>0))return;dt=Math.min(dt,0.05);
   ['gas','brake'].forEach(k=>{if(keys[k])inp[k]=Math.min(1,inp[k]+dt*3.5);else if(!held[k])inp[k]=Math.max(0,inp[k]-dt*(k==='gas'?5:4));});
-  S.thr+=(thrMap(inp.gas)-S.thr)*Math.min(1,dt*14);S.brk+=(inp.brake-S.brk)*Math.min(1,dt*14);
+  S.thr+=(inp.gas-S.thr)*Math.min(1,dt*14);S.brk+=(inp.brake-S.brk)*Math.min(1,dt*14);
   if(mode==='garage'){S.gear=0;S.shift=null;S.v=0;S.brk=0;}
   const wasRun=S.run;
-  turboStep(dt);shiftStep(dt);autoShift(dt);physics(dt);
+  tuneStep(dt);shiftStep(dt);autoShift(dt);physics(dt);
   if(mode==='garage')S.v=0;
   if(S.stalled){S.stalled=0;toast('Engine stalled');}
   if(!wasRun&&S.run)toast('Engine running');
-  const rpm=S.w*RPM,bm=preset.turbo?preset.bSet*S.spool:preset.sc?preset.bSet*(0.35+0.65*Math.min(1,rpm/4500)):-0.05;
+  const rpm=S.w*RPM,bm=boostBar(rpm);
   const tgt=S.run?lerp(-0.62,bm,Math.pow(S.thrE,1.5)):(S.starting?-0.25:0);
   S.map+=(tgt-S.map)*(1-Math.exp(-dt/0.12));
-  wearStep(dt);A.spool=S.spool;A.w=S.w;A.run=S.run;A.thr=S.thrE;A.thrRaw=S.thr;A.boost=Math.max(0,S.map);A.cut=S.cut>0;A.cutFrac=S.cutFrac;A.starting=S.starting;A.gear=S.gear;A.wIn=S.wInShow||0;A.v=S.v;backfireUpdate(dt);audioUpdate(dt);
+  A.w=S.w;A.run=S.run;A.thr=S.thrE;A.thrRaw=S.thr;A.boost=Math.max(0,S.map);A.cut=S.cut>0;A.cutFrac=S.cutFrac;A.starting=S.starting;A.gear=S.gear;A.wIn=S.wInShow||0;A.v=S.v;backfireUpdate(dt);audioUpdate(dt);
   pedalDraw(pG,inp.gas);pedalDraw(pB,inp.brake);
-  visuals(dt);camUpdate(dt);renderer.render(scene,camera);hud(dt);
+  visuals(dt);if(window.CAR&&CAR.on){CAR.step(dt);renderer.render(CAR.scene,CAR.cam);}else{camUpdate(dt);renderer.render(scene,camera);}hud(dt);tuneLive();
 }
-applyPreset(loadTune());applyGlass();applyTheme();renderSheet();
+loadTuneDB();applyPreset(TUNEDB.sel||0);applyGlass();applyTheme();renderSheet();
 requestAnimationFrame(t=>{last=t;frame(t);});
 
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
+<script src="topo.js"></script>
+<script src="car.js"></script>
 </body>
 </html>
